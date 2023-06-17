@@ -8,9 +8,15 @@ dependencies:
   '@types/node':
     specifier: 20.3.1
     version: 20.3.1
+  dotenv-safe:
+    specifier: ^8.2.0
+    version: 8.2.0
   next:
     specifier: 13.4.6
     version: 13.4.6(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.4)
+  postgres:
+    specifier: ^3.3.5
+    version: 3.3.5
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -1238,6 +1244,17 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dotenv-safe@8.2.0:
+    resolution: {integrity: sha512-uWwWWdUQkSs5a3mySDB22UtNwyEYi0JtEQu+vDzIqr9OjbDdC2Ip13PnSpi/fctqlYmzkxCeabiyCAOROuAIaA==}
+    dependencies:
+      dotenv: 8.6.0
+    dev: false
+
+  /dotenv@8.6.0:
+    resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
+    engines: {node: '>=10'}
+    dev: false
 
   /electron-to-chromium@1.4.433:
     resolution: {integrity: sha512-MGO1k0w1RgrfdbLVwmXcDhHHuxCn2qRgR7dYsJvWFKDttvYPx6FNzCGG0c/fBBvzK2LDh3UV7Tt9awnHnvAAUQ==}
@@ -2985,6 +3002,10 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: true
+
+  /postgres@3.3.5:
+    resolution: {integrity: sha512-+JD93VELV9gHkqpV5gdL5/70HdGtEw4/XE1S4BC8f1mcPmdib3K5XsKVbnR1XcAyC41zOnifJ+9YRKxdIsXiUw==}
+    dev: false
 
   /prebuild-install@7.1.1:
     resolution: {integrity: sha512-jAXscXWMcCK8GgCoHOfIr0ODh5ai8mj63L2nWrjuAgXE6tDyYGnx4/8o/rCgU+B4JSyZBKbeZqzhtwtC3ovxjw==}
