@@ -5,6 +5,7 @@
   font-family: 'Roboto', sans-serif;
   /* border: 1px solid red; */
   margin: 0;
+  padding: 0;
 }
 
 header {
@@ -27,4 +28,15 @@ a {
 a:hover,
 a:focus-visible {
   background-color: #fef2c3;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #c7d2fe;
+  padding: 16px;
+  width: 100%;
+  font-size: 0.75rem;
 }
