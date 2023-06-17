@@ -3,5 +3,28 @@
 * {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  background-color: rgb(199 210 254);
+  /* border: 1px solid red; */
+  margin: 0;
+}
+
+header {
+  background-color: #c7d2fe;
+}
+
+nav {
+  display: flex;
+  gap: 32px;
+  padding: 24px;
+  font-size: 1.2rem;
+  justify-content: flex-start;
+}
+
+a {
+  color: black;
+  text-decoration-line: underline overline;
+  text-underline-offset: 8px;
+}
+a:hover,
+a:focus-visible {
+  background-color: #fef2c3;
 }
