@@ -1,21 +1,49 @@
 import './globals.css';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { getUserBySessionToken } from '../database/users';
+import { logout } from './(auth)/logout/actions';
+import { LogoutButton } from './(auth)/logout/LogoutButton';
 
 export const metadata = {
   title: 'Food Diary',
   description: 'Log your meals and symptoms to detect your food triggers',
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  // 1. get the session token from the cookie
+  const cookieStore = cookies();
+  const sessionToken = cookieStore.get('sessionToken');
+
+  const user = !sessionToken?.value
+    ? undefined
+    : await getUserBySessionToken(sessionToken.value);
+
   return (
     <html lang="en">
       <body>
         <header>
           <nav>
-            <Link href="/">Home</Link>
-            <Link href="/new">New entry</Link>
-            <Link href="/statistics">Statistics</Link>
-            <Link href="/profile">My profile</Link>
+            <div className="pages">
+              <Link href="/">Home</Link>
+              <Link href="/new">New entry</Link>
+              <Link href="/statistics">Statistics</Link>
+              <Link href="/profile">My profile</Link>
+            </div>
+
+            <div className="auth">
+              {user ? (
+                <>
+                  <div>{user.username}</div>
+                  <LogoutButton logout={logout} />
+                </>
+              ) : (
+                <>
+                  <Link href="/register">Register</Link>
+                  <Link href="/login">Log in</Link>
+                </>
+              )}
+            </div>
           </nav>
         </header>
         {children}

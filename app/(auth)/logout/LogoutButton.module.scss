@@ -1,0 +1,14 @@
+.buttonLikeLink {
+  background-color: #c7d2fe;
+  border: none;
+  padding: 0 !important;
+  text-decoration: underline overline;
+  cursor: pointer;
+  font-size: 1.2rem;
+  text-underline-offset: 8px;
+
+  &:hover,
+  &:focus-visible {
+    background-color: #fef2c3;
+  }
+}
