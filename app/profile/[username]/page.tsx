@@ -1,12 +1,22 @@
+import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
-import { getUserByUsername } from '../../../database/users';
+import {
+  getLoggedInUserByUsername,
+  getUserByUsername,
+} from '../../../database/users';
 
 type Props = {
   params: { username: string };
 };
 
 export default async function ProfileUsernamePage({ params }: Props) {
-  const user = await getUserByUsername(params.username);
+  // 1. get the session token from the cookie
+  const cookieStore = cookies();
+  const sessionToken = cookieStore.get('sessionToken');
+
+  const user = !sessionToken?.value
+    ? undefined
+    : await getLoggedInUserByUsername(params.username, sessionToken.value);
 
   if (!user) {
     notFound();
