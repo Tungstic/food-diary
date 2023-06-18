@@ -16,6 +16,7 @@ export function LogoutButton(props: Props) {
         formAction={async () => {
           await props.logout();
           router.refresh();
+          router.push('/');
         }}
       >
         Log out
