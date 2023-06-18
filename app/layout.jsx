@@ -24,26 +24,30 @@ export default async function RootLayout({ children }) {
       <body>
         <header>
           <nav>
-            <div className="pages">
-              <Link href="/">Home</Link>
-              <Link href="/new">New entry</Link>
-              <Link href="/statistics">Statistics</Link>
-              <Link href="/profile">My profile</Link>
-            </div>
-
-            <div className="auth">
-              {user ? (
-                <>
+            {user ? (
+              <>
+                <div className="pages">
+                  <Link href="/">Home</Link>
+                  <Link href="/new">New entry</Link>
+                  <Link href="/statistics">Statistics</Link>
+                  <Link href="/profile">My profile</Link>
+                </div>
+                <div className="auth">
                   <div>{user.username}</div>
                   <LogoutButton logout={logout} />
-                </>
-              ) : (
-                <>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="pages">
+                  <Link href="/">Home</Link>
+                </div>
+                <div className="auth">
                   <Link href="/register">Register</Link>
                   <Link href="/login">Log in</Link>
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
           </nav>
         </header>
         {children}

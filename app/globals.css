@@ -17,10 +17,13 @@ nav {
   padding: 24px;
   font-size: 1.2rem;
   justify-content: space-between;
+  gap: 24px;
+  margin-left: 32px;
+  margin-right: 32px;
 
   & > .pages {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: 24px;
   }
 }
@@ -48,5 +51,6 @@ footer {
 
 .auth {
   display: flex;
+  justify-content: flex-end;
   gap: 24px;
 }
