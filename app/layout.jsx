@@ -7,7 +7,7 @@ import { LogoutButton } from './(auth)/logout/LogoutButton';
 
 export const metadata = {
   title: 'Food Diary',
-  description: 'Log your meals and symptoms to detect your food triggers',
+  description: 'Find out your food triggers and get your data analyzed',
 };
 
 export default async function RootLayout({ children }) {
