@@ -1,18 +1,33 @@
 'use client';
 
+import { useState } from 'react';
 import CreatableSelect from 'react-select/creatable';
 
-const predefinedSymptoms = [
-  { value: 'Nausea', label: 'Nausea' },
-  { value: 'Vomiting', label: 'Vomiting' },
-  { value: 'Diarrhea', label: 'Diarrhea' },
-];
+export default function EntryForm(props) {
+  const [value, setValue] = useState('');
 
-export default function EntryForm() {
+  // get an array of objects from DB symptoms table (keys: id, symptomName, userId)
+  const symptomsFromDB = props.symptoms;
+
+  const symptomDropdown = symptomsFromDB.map((symptom) => {
+    return { value: symptom.symptomName, label: symptom.symptomName };
+  });
+
+  /*   async function saveNewSymptom() {
+    const response = await fetch('/api/symptoms', {
+      method: 'POST',
+      body: JSON.stringify(),
+    });
+  } */
+
   return (
     <form onSubmit={(event) => event.preventDefault()}>
       <div>Meal</div>
-      <CreatableSelect options={predefinedSymptoms} />
+      <CreatableSelect
+        isMulti
+        options={symptomDropdown}
+        // use getNewOptionData??
+      />
 
       <label>
         Ingredients:

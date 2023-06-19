@@ -38,8 +38,16 @@ export const getSymptomsByUserId = cache(async (userId: number) => {
       symptoms.symptom_name
     FROM symptoms
     WHERE
-      symptoms.user_id = ${userId};
+      symptoms.user_id = ${userId}
 
   `;
   return symptomsByUserId;
+});
+
+export const getAllSymptoms = cache(async () => {
+  const symptoms = await sql<Symptom[]>`
+    SELECT *
+    FROM symptoms
+  `;
+  return symptoms;
 });
