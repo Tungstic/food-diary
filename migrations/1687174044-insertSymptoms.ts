@@ -27,7 +27,7 @@ export async function up(sql: Sql) {
 export async function down(sql: Sql) {
   for (const symptom of predefinedSymptoms) {
     await sql`
-    DELETE FROM symptoms WHERE symptom_name = ${symptom}
+    DELETE FROM symptoms WHERE symptom_name = ${symptom.toLowerCase()}
   `;
   }
 }
