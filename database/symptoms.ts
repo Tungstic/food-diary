@@ -41,8 +41,7 @@ export const getSymptomsByUserId = cache(async (userId: number) => {
     SELECT
       symptoms.symptom_name
     FROM symptoms
-    INNER JOIN users ON
-      symptoms.user_id = users.id AND
+    WHERE
       symptoms.user_id = ${userId};
 
   `;
