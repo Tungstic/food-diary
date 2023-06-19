@@ -18,7 +18,7 @@ export async function up(sql: Sql) {
     INSERT INTO symptoms
     (symptom_name, user_id)
     VALUES
-    (${symptom}, ${4})
+    (${symptom.toLowerCase()}, ${4})
 
   `;
   }

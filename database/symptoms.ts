@@ -10,7 +10,7 @@ export const getSymptomBySymptomName = cache(async (symptomName: string) => {
     FROM
       symptoms
     WHERE
-      users.username = ${symptomName.toLowerCase()}
+      symptoms.symptom_name = ${symptomName.toLowerCase()}
  `;
 
   return symptom;
