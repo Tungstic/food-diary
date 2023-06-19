@@ -2,10 +2,6 @@ import { cache } from 'react';
 import { Symptom } from '../migrations/1687171306-createSymptomsTable';
 import { sql } from './connect';
 
-/* type UserWithPasswordHash = User & {
-  passwordHash: string;
-}; */
-
 export const getSymptomBySymptomName = cache(async (symptomName: string) => {
   const [symptom] = await sql<Symptom[]>`
     SELECT
