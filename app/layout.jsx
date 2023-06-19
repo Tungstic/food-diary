@@ -30,7 +30,7 @@ export default async function RootLayout({ children }) {
                   <Link href="/">Home</Link>
                   <Link href="/new">New entry</Link>
                   <Link href="/statistics">Statistics</Link>
-                  <Link href={`/profile/${user.username}`}>My profile</Link>
+                  <Link href="/profile">My profile</Link>
                 </div>
                 <div className="auth">
                   <div>{user.username}</div>

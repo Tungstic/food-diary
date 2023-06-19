@@ -8,7 +8,7 @@ type Props = { searchParams: { returnTo?: string | string[] } };
 export default async function LoginPage({ searchParams }: Props) {
   // if the user is logged in redirect
 
-  // 1. Check if the sessionToken cookie exit
+  // 1. Check if the sessionToken cookie exist
   const sessionTokenCookie = cookies().get('sessionToken');
   // 2. check if the sessionToken has a valid session
   const session =
