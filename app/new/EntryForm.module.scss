@@ -1,0 +1,16 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.symptomsInput {
+  display: flex;
+  gap: 16px;
+
+  &:first-child {
+    align-items: center;
+  }
+
+  & > .select {
+    flex: 2;
+  }
+}
