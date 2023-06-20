@@ -13,12 +13,16 @@ export default function EntryForm(props) {
     return { value: symptom.symptomName, label: symptom.symptomName };
   });
 
-  /*   async function saveNewSymptom() {
+  async function saveNewSymptom() {
     const response = await fetch('/api/symptoms', {
       method: 'POST',
-      body: JSON.stringify(),
+      body: JSON.stringify({ symptomName: 'test', userId: 3 }),
     });
-  } */
+
+    const data = await response.json();
+
+    console.log('my data from user', data);
+  }
 
   return (
     <form onSubmit={(event) => event.preventDefault()}>
