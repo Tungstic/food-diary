@@ -22,7 +22,7 @@ export default async function NewEntryPage() {
   return (
     <>
       <div>Dear username, make a new entry here</div>
-      <EntryForm symptoms={symptoms} />
+      <EntryForm symptoms={symptoms} user={user.id} />
     </>
   );
 }

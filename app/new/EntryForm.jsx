@@ -10,6 +10,7 @@ export default function EntryForm(props) {
   const [newSymptom, setNewSymptom] = useState('');
   // get an array of objects from DB symptoms table (keys: id, symptomName, userId)
   const symptomsFromDB = props.symptoms;
+  const currentUserId = props.user;
 
   const symptomDropdown = symptomsFromDB.map((symptom) => {
     return { value: symptom.symptomName, label: symptom.symptomName };
@@ -18,18 +19,16 @@ export default function EntryForm(props) {
   function handleCreate(newOption) {
     setValue(newOption);
 
-    console.log('this is new symptom', newOption);
-
     const usersInput = newOption.find((option) => option.__isNew__ === true);
     if (usersInput) {
       setNewSymptom(usersInput.value);
     }
   }
-
+  // save new symptom on submitting new entry??
   async function saveNewSymptom() {
     const response = await fetch('/api/symptoms', {
       method: 'POST',
-      body: JSON.stringify({ symptomName: newSymptom, userId: 5 }),
+      body: JSON.stringify({ symptomName: newSymptom, userId: currentUserId }),
     });
 
     const data = await response.json();
