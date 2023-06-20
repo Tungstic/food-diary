@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createSymptom } from '../../../database/symptoms';
-import { Symptom } from '../../../migrations/1687171306-createSymptomsTable';
+
+type Symptom = {
+  symptomName: string;
+  userId: number;
+};
 
 type Error = {
   error: string;

@@ -4,8 +4,10 @@ import { useState } from 'react';
 import CreatableSelect from 'react-select/creatable';
 
 export default function EntryForm(props) {
-  const [value, setValue] = useState('');
-
+  //this is array of input objects (user's choice)
+  // {value: '', label: '', __isNew__: boolean}
+  const [value, setValue] = useState([]);
+  const [newSymptom, setNewSymptom] = useState('');
   // get an array of objects from DB symptoms table (keys: id, symptomName, userId)
   const symptomsFromDB = props.symptoms;
 
@@ -13,10 +15,21 @@ export default function EntryForm(props) {
     return { value: symptom.symptomName, label: symptom.symptomName };
   });
 
+  function handleCreate(newOption) {
+    setValue(newOption);
+
+    console.log('this is new symptom', newOption);
+
+    const usersInput = newOption.find((option) => option.__isNew__ === true);
+    if (usersInput) {
+      setNewSymptom(usersInput.value);
+    }
+  }
+
   async function saveNewSymptom() {
     const response = await fetch('/api/symptoms', {
       method: 'POST',
-      body: JSON.stringify({ symptomName: 'test', userId: 3 }),
+      body: JSON.stringify({ symptomName: newSymptom, userId: 5 }),
     });
 
     const data = await response.json();
@@ -29,8 +42,9 @@ export default function EntryForm(props) {
       <div>Meal</div>
       <CreatableSelect
         isMulti
+        isSearchable
         options={symptomDropdown}
-        // use getNewOptionData??
+        onChange={handleCreate}
       />
 
       <label>
@@ -42,6 +56,9 @@ export default function EntryForm(props) {
         <input />
       </label>
       <div>time of meal: react-date-time-picker</div>
+      {newSymptom !== '' && (
+        <button onClick={saveNewSymptom}>Save new symptom</button>
+      )}
     </form>
   );
 }
