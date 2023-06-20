@@ -1,6 +1,8 @@
 .form {
   display: flex;
+  margin: 16px;
   flex-direction: column;
+  gap: 8px;
 }
 .symptomsInput {
   display: flex;
