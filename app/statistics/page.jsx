@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { getSymptomsByUserId } from '../../database/symptoms';
 import { getUserBySessionToken } from '../../database/users';
 
@@ -13,7 +13,7 @@ export default async function StatisticsPage() {
     : await getUserBySessionToken(sessionToken.value);
 
   if (!user) {
-    notFound();
+    redirect('/login');
   }
 
   const listOfSymptoms = await getSymptomsByUserId(user.id);

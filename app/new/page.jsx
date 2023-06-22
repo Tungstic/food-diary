@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { getAllIngredients } from '../../database/ingredients';
 import { getAllSymptoms } from '../../database/symptoms';
 import { getUserBySessionToken } from '../../database/users';
@@ -15,7 +15,7 @@ export default async function NewEntryPage() {
     : await getUserBySessionToken(sessionToken.value);
 
   if (!user) {
-    notFound();
+    redirect('/login');
   }
 
   const symptoms = await getAllSymptoms();
