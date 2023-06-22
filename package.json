@@ -19,6 +19,8 @@
     "postgres": "^3.3.5",
     "react": "18.2.0",
     "react-calendar": "^4.3.0",
+    "react-clock": "^4.2.0",
+    "react-datetime-picker": "^5.2.0",
     "react-dom": "18.2.0",
     "react-select": "^5.7.3",
     "sass": "^1.63.4",

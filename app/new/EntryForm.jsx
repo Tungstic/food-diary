@@ -1,17 +1,24 @@
 'use client';
 
+import 'react-datetime-picker/dist/DateTimePicker.css';
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
 import { useState } from 'react';
+import DateTimePicker from 'react-datetime-picker';
 import CreatableSelect from 'react-select/creatable';
 import styles from './EntryForm.module.scss';
 
 export default function EntryForm(props) {
   // this is array of input objects (user's choice)
   // {value: '', label: '', __isNew__: boolean}
-  // const [value, setValue] = useState([]);
+
   const choiceOfSymptoms = [];
   const choiceOfIngredients = [];
   const [newSymptom, setNewSymptom] = useState('');
   const [newIngredient, setNewIngredient] = useState('');
+  const [mealName, setMealName] = useState('');
+  const [mealTime, setMealTime] = useState(new Date());
+
   // get an array of objects from DB symptoms table (keys: id, symptomName, userId)
   const symptomsFromDB = props.symptoms;
   const currentUserId = props.user;
@@ -72,6 +79,10 @@ export default function EntryForm(props) {
 
   return (
     <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
+      <label>
+        Name your meal (e.g. pizza, soup with dumplings, cevapcici)
+        <input onChange={(event) => setMealName(event.currentTarget.value)} />
+      </label>
       <div className={styles.symptomsInput}>
         <div>Choose ingredients that might trigger symptoms</div>
         <CreatableSelect
@@ -92,8 +103,10 @@ export default function EntryForm(props) {
           onChange={handleCreateSymptom}
         />
       </div>
-
-      <div>time of meal: react-date-time-picker</div>
+      <div>
+        choose the time of meal
+        <DateTimePicker onChange={setMealTime} value={mealTime} />
+      </div>
       {newSymptom !== '' && (
         <button onClick={saveNewSymptom}>Save new symptom</button>
       )}
