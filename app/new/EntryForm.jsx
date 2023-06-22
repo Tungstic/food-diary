@@ -94,6 +94,7 @@ export default function EntryForm(props) {
   }
 
   console.log('mealTime is', mealTime);
+
   return (
     <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
       <label>
