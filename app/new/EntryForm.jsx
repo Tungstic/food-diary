@@ -77,6 +77,23 @@ export default function EntryForm(props) {
     console.log('new ingredient from user', data);
   }
 
+  async function saveNewEntry() {
+    const response = await fetch('/api/entries', {
+      method: 'POST',
+      body: JSON.stringify({
+        mealName: mealName,
+        userId: currentUserId,
+        timeOfMeal: mealTime,
+        note: 'bla',
+      }),
+    });
+
+    const data = await response.json();
+
+    console.log('new entry', data);
+  }
+
+  console.log('mealTime is', mealTime);
   return (
     <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
       <label>
@@ -110,7 +127,11 @@ export default function EntryForm(props) {
       </div>
       <div>
         choose the time of meal
-        <DateTimePicker onChange={setMealTime} value={mealTime} />
+        <DateTimePicker
+          format="dd-MM-y h:mm:ss"
+          onChange={setMealTime}
+          value={mealTime}
+        />
       </div>
       <label htmlFor="note">
         Note
@@ -127,7 +148,7 @@ export default function EntryForm(props) {
       {newIngredient !== '' && (
         <button onClick={saveNewIngredient}>Save new ingredient</button>
       )}
-      <button>Save the entry</button>
+      <button onClick={saveNewEntry}>Save the entry</button>
     </form>
   );
 }
