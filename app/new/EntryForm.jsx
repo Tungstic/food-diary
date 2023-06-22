@@ -81,11 +81,15 @@ export default function EntryForm(props) {
     <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
       <label>
         Name your meal (e.g. pizza, soup with dumplings, cevapcici)
-        <input onChange={(event) => setMealName(event.currentTarget.value)} />
+        <input
+          required
+          onChange={(event) => setMealName(event.currentTarget.value)}
+        />
       </label>
       <div className={styles.symptomsInput}>
         <div>Choose ingredients that might trigger symptoms</div>
         <CreatableSelect
+          required
           className={styles.select}
           isMulti
           isSearchable
@@ -96,6 +100,7 @@ export default function EntryForm(props) {
       <div className={styles.symptomsInput}>
         <div>Choose symptoms you're experiencing</div>
         <CreatableSelect
+          required
           className={styles.select}
           isMulti
           isSearchable
@@ -107,12 +112,22 @@ export default function EntryForm(props) {
         choose the time of meal
         <DateTimePicker onChange={setMealTime} value={mealTime} />
       </div>
+      <label htmlFor="note">
+        Note
+        <textarea
+          name="note"
+          maxLength={150}
+          placeholder="Feeling heavy after food"
+        />
+      </label>
+
       {newSymptom !== '' && (
         <button onClick={saveNewSymptom}>Save new symptom</button>
       )}
       {newIngredient !== '' && (
         <button onClick={saveNewIngredient}>Save new ingredient</button>
       )}
+      <button>Save the entry</button>
     </form>
   );
 }
