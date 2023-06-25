@@ -4,8 +4,8 @@ import { createEntry } from '../../../database/entries';
 type Entry = {
   mealName: string;
   userId: number;
-  timeOfMeal: Date;
-  note: string;
+  dateOfMeal: Date;
+  note: string | undefined;
 };
 
 type Error = {
@@ -28,7 +28,7 @@ export async function POST(
   const newEntry = await createEntry(
     body.mealName,
     body.userId,
-    body.timeOfMeal,
+    body.dateOfMeal,
     body.note,
   );
 
@@ -48,7 +48,7 @@ export async function POST(
       entry: {
         mealName: newEntry.mealName,
         userId: newEntry.userId,
-        timeOfMeal: newEntry.timeOfMeal,
+        dateOfMeal: newEntry.dateOfMeal,
         note: newEntry.note,
       },
     },

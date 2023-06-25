@@ -27,17 +27,17 @@ type EntryWithIngredient = {
 }); */
 
 export const createEntry = cache(
-  async (mealName: string, userId: number, timeOfMeal: Date, note: string) => {
+  async (mealName: string, userId: number, dateOfMeal: Date, note: string) => {
     const [entry] = await sql<Entry[]>`
     INSERT INTO entries
-      (meal_name, user_id, time_of_meal, note)
+      (meal_name, user_id, date_of_meal, note)
     VALUES
-      (${mealName.toLowerCase()}, ${userId}, ${timeOfMeal}, ${note})
+      (${mealName.toLowerCase()}, ${userId}, ${dateOfMeal}, ${note})
     RETURNING
       id,
       meal_name,
       user_id,
-      time_of_meal
+      date_of_meal
  `;
     return entry;
   },

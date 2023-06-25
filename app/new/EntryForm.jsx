@@ -82,7 +82,7 @@ export default function EntryForm(props) {
       body: JSON.stringify({
         mealName: mealName,
         userId: currentUserId,
-        timeOfMeal: mealDate,
+        dateOfMeal: mealDate,
         note: 'bla',
       }),
     });
@@ -100,7 +100,7 @@ export default function EntryForm(props) {
     console.log('entry2', data2); */
   }
 
-  console.log('mealTime is', mealDate);
+  console.log('mealDate is', mealDate);
 
   return (
     <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
