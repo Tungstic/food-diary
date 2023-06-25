@@ -103,18 +103,8 @@ export default function EntryForm(props) {
     console.log('entry2', data2); */
   }
 
-  console.log('mealDate is', mealDate);
-
   return (
     <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
-      {hasMounted === true && (
-        <DatePicker
-          aria-label="pick the entry's date"
-          onChange={setMealDate}
-          value={mealDate}
-        />
-      )}
-
       <label>
         Name your meal (e.g. pizza, soup with dumplings, cevapcici)
         <input
@@ -153,6 +143,14 @@ export default function EntryForm(props) {
           placeholder="Feeling heavy after food"
         />
       </label>
+      {hasMounted === true && (
+        <DatePicker
+          aria-label="pick the entry's date"
+          onChange={setMealDate}
+          value={mealDate}
+          locale="en-GB"
+        />
+      )}
 
       {newSymptom !== '' && (
         <button onClick={saveNewSymptom}>Save new symptom</button>
