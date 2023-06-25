@@ -1,6 +1,9 @@
 'use client';
 
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
+import DatePicker from 'react-date-picker';
 import CreatableSelect from 'react-select/creatable';
 import styles from './EntryForm.module.scss';
 
@@ -13,7 +16,7 @@ export default function EntryForm(props) {
   const [newSymptom, setNewSymptom] = useState('');
   const [newIngredient, setNewIngredient] = useState('');
   const [mealName, setMealName] = useState('');
-  const [mealTime, setMealTime] = useState(new Date());
+  const [mealDate, setMealDate] = useState(new Date());
 
   // get an array of objects from DB symptoms table (keys: id, symptomName, userId)
   const symptomsFromDB = props.symptoms;
@@ -79,7 +82,7 @@ export default function EntryForm(props) {
       body: JSON.stringify({
         mealName: mealName,
         userId: currentUserId,
-        timeOfMeal: mealTime,
+        timeOfMeal: mealDate,
         note: 'bla',
       }),
     });
@@ -97,10 +100,13 @@ export default function EntryForm(props) {
     console.log('entry2', data2); */
   }
 
-  console.log('mealTime is', mealTime);
+  console.log('mealTime is', mealDate);
 
   return (
     <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
+      <div>
+        <DatePicker onChange={setMealDate} value={mealDate} />
+      </div>
       <label>
         Name your meal (e.g. pizza, soup with dumplings, cevapcici)
         <input
