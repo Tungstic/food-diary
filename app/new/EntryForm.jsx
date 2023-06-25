@@ -1,10 +1,6 @@
 'use client';
 
-import 'react-datetime-picker/dist/DateTimePicker.css';
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
 import { useState } from 'react';
-import DateTimePicker from 'react-datetime-picker';
 import CreatableSelect from 'react-select/creatable';
 import styles from './EntryForm.module.scss';
 
@@ -91,6 +87,14 @@ export default function EntryForm(props) {
     const data = await response.json();
 
     console.log('new entry', data);
+
+    /* const entryId = data.id;
+
+    const response2 = await fetch(`api/entries/${entryId}`, {
+      method: 'GET',
+    });
+    const data2 = await response.json();
+    console.log('entry2', data2); */
   }
 
   console.log('mealTime is', mealTime);
@@ -126,14 +130,7 @@ export default function EntryForm(props) {
           onChange={handleCreateSymptom}
         />
       </div>
-      <div>
-        choose the time of meal
-        <DateTimePicker
-          format="dd-MM-y h:mm:ss"
-          onChange={setMealTime}
-          value={mealTime}
-        />
-      </div>
+
       <label htmlFor="note">
         Note
         <textarea

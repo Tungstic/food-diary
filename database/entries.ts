@@ -75,23 +75,23 @@ export const createEntryWithIngredient = cache(
   },
 );
 
-/* export const getSymptomsByUserId = cache(async (userId: number) => {
-  const symptomsByUserId = await sql<Symptom[]>`
+export const getEntryById = cache(async (entryId: number) => {
+  const [entryById] = await sql<Entry[]>`
     SELECT
-      symptoms.symptom_name
-    FROM symptoms
+      *
+    FROM entries
     WHERE
-      symptoms.user_id = ${userId}
+      id = ${entryId}
 
   `;
-  return symptomsByUserId;
+  return entryById;
 });
 
-export const getAllSymptoms = cache(async () => {
-  const symptoms = await sql<Symptom[]>`
+export const getAllEntries = cache(async () => {
+  const entries = await sql<Entry[]>`
     SELECT *
-    FROM symptoms
+    FROM entries
+    ORDER BY entries.time_of_meal
   `;
-  return symptoms;
+  return entries;
 });
- */
