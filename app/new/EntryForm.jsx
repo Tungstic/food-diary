@@ -10,27 +10,36 @@ import styles from './EntryForm.module.scss';
 export default function EntryForm(props) {
   // this is array of input objects (user's choice)
   // {value: '', label: '', __isNew__: boolean}
-
   const choiceOfSymptoms = [];
   const choiceOfIngredients = [];
+  // value property from the above object (created by user, new to DB)
   const [newSymptom, setNewSymptom] = useState('');
   const [newIngredient, setNewIngredient] = useState('');
+  // string as a name, input's text value
   const [mealName, setMealName] = useState('');
+  // current local date (with time) for Date Picker
   const [mealDate, setMealDate] = useState(Date());
+  // Date Picker only rendered after page's mounted (to avoid hydration error)
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => setHasMounted(true), []);
 
-  // get an array of objects from DB symptoms table (keys: id, symptomName, userId)
+  // get an array of objects from DB symptoms/ingredients table (keys: id, symptomName, userId)
   const symptomsFromDB = props.symptoms;
-  const currentUserId = props.user;
-  const ingredientsFromDB = props.ingredients;
 
+  const ingredientsFromDB = props.ingredients;
+  // logged in user
+  const currentUserId = props.user;
+
+  // dropdowns for Select elements (data from DB before user creates new DB rows)
   const ingredientDropdown = ingredientsFromDB.map((ingredient) => {
     return {
       value: ingredient.ingredientName,
       label: ingredient.ingredientName,
     };
+  });
+  const symptomDropdown = symptomsFromDB.map((symptom) => {
+    return { value: symptom.symptomName, label: symptom.symptomName };
   });
 
   function handleCreateIngredient(newOption) {
@@ -40,10 +49,6 @@ export default function EntryForm(props) {
       setNewIngredient(usersInput.value);
     }
   }
-
-  const symptomDropdown = symptomsFromDB.map((symptom) => {
-    return { value: symptom.symptomName, label: symptom.symptomName };
-  });
 
   function handleCreateSymptom(newOption) {
     choiceOfSymptoms.push(newOption);
