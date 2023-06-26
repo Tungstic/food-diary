@@ -14,7 +14,7 @@ export async function up(sql: Sql) {
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       meal_name varchar (50) NOT NULL,
       user_id integer NOT NULL REFERENCES users (id),
-      date_of_meal DATE NOT NULL,
+      date_of_meal timestamptz NOT NULL,
       note varchar (200)
     )
   `;

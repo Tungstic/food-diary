@@ -16,7 +16,7 @@ export default function EntryForm(props) {
   const [newSymptom, setNewSymptom] = useState('');
   const [newIngredient, setNewIngredient] = useState('');
   const [mealName, setMealName] = useState('');
-  const [mealDate, setMealDate] = useState(new Date());
+  const [mealDate, setMealDate] = useState(Date());
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => setHasMounted(true), []);
@@ -146,9 +146,9 @@ export default function EntryForm(props) {
       {hasMounted === true && (
         <DatePicker
           aria-label="pick the entry's date"
+          locale="en-US"
           onChange={setMealDate}
           value={mealDate}
-          locale="en-GB"
         />
       )}
 
