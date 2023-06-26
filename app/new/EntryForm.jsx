@@ -8,10 +8,11 @@ import CreatableSelect from 'react-select/creatable';
 import styles from './EntryForm.module.scss';
 
 export default function EntryForm(props) {
-  // this is array of input objects (user's choice)
+  // CreatableSelect: newOption is array of input objects (user's choice)
   // {value: '', label: '', __isNew__: boolean}
-  const choiceOfSymptoms = [];
-  const choiceOfIngredients = [];
+  // array of strings (symptoms/ingredients) that represent only user's choice - TO BE SENT TO ENTRIES & tables
+  let symptomChoice = [];
+  let ingredientChoice = [];
   // value property from the above object (created by user, new to DB)
   const [newSymptom, setNewSymptom] = useState('');
   const [newIngredient, setNewIngredient] = useState('');
@@ -42,17 +43,21 @@ export default function EntryForm(props) {
     return { value: symptom.symptomName, label: symptom.symptomName };
   });
 
-  function handleCreateIngredient(newOption) {
-    choiceOfIngredients.push(newOption);
+  function handleIngredientChoice(newOption) {
+    ingredientChoice = newOption.map((option) => option.value);
+    console.log(ingredientChoice);
+    // find the new ingredient created by user (if any)
     const usersInput = newOption.find((option) => option.__isNew__ === true);
     if (usersInput) {
       setNewIngredient(usersInput.value);
     }
   }
 
-  function handleCreateSymptom(newOption) {
-    choiceOfSymptoms.push(newOption);
+  function handleSymptomChoice(newOption) {
+    symptomChoice = newOption.map((option) => option.value);
 
+    console.log(symptomChoice);
+    // find the new symptom created by user (if any)
     const usersInput = newOption.find((option) => option.__isNew__ === true);
     if (usersInput) {
       setNewSymptom(usersInput.value);
@@ -98,14 +103,6 @@ export default function EntryForm(props) {
     const data = await response.json();
 
     console.log('new entry', data);
-
-    /* const entryId = data.id;
-
-    const response2 = await fetch(`api/entries/${entryId}`, {
-      method: 'GET',
-    });
-    const data2 = await response.json();
-    console.log('entry2', data2); */
   }
 
   return (
@@ -125,7 +122,7 @@ export default function EntryForm(props) {
           isMulti
           isSearchable
           options={ingredientDropdown}
-          onChange={handleCreateIngredient}
+          onChange={handleIngredientChoice}
         />
       </div>
       <div className={styles.symptomsInput}>
@@ -136,7 +133,7 @@ export default function EntryForm(props) {
           isMulti
           isSearchable
           options={symptomDropdown}
-          onChange={handleCreateSymptom}
+          onChange={handleSymptomChoice}
         />
       </div>
 
