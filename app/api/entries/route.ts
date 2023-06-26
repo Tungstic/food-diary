@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createEntry } from '../../../database/entries';
+import { createEntry, getAllEntries } from '../../../database/entries';
 
 type Entry = {
+  mealName: string;
+  userId: number;
+  dateOfMeal: Date;
+  note: string | undefined;
+};
+
+type EntryFromDB = {
+  id: number;
   mealName: string;
   userId: number;
   dateOfMeal: Date;
@@ -17,6 +25,8 @@ export type CreateEntryPost =
       entry: Entry;
     }
   | Error;
+
+type EntriesResponseBodyGet = { entries: EntryFromDB[] | Error };
 
 export async function POST(
   request: NextRequest,
@@ -54,4 +64,19 @@ export async function POST(
     },
     { status: 200 },
   );
+}
+
+export async function GET(
+  request: NextRequest,
+): Promise<NextResponse<EntriesResponseBodyGet>> {
+  const body = await request.json();
+
+  console.log('my GET body from api entries', body);
+
+  const allEntries = await getAllEntries();
+
+  console.log(allEntries);
+  // why does Postman get 500 error?
+  // why does allEntries have to be a value of key "entries"? where does that key come from?
+  return NextResponse.json({ entries: allEntries });
 }

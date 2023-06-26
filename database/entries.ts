@@ -91,7 +91,7 @@ export const getAllEntries = cache(async () => {
   const entries = await sql<Entry[]>`
     SELECT *
     FROM entries
-    ORDER BY entries.time_of_meal
+
   `;
   return entries;
 });
