@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   createEntry,
+  createEntryWithIngredient,
   createEntryWithSymptom,
   getAllEntries,
 } from '../../../database/entries';
+import { getIngredientByIngredientName } from '../../../database/ingredients';
 import { getSymptomBySymptomName } from '../../../database/symptoms';
 
 type Entry = {
@@ -74,6 +76,18 @@ export async function POST(
         newEntry.id,
       );
       console.log('newEntryWithSymptom', newEntryWithSymptom);
+    }
+  }
+
+  const ingredientChoice = body.ingredients;
+  for (const ingredient of ingredientChoice) {
+    const ingredientId = await getIngredientByIngredientName(ingredient);
+
+    if (ingredientId) {
+      const newEntryWithIngredient = await createEntryWithIngredient(
+        ingredientId.id,
+        newEntry.id,
+      );
     }
   }
 

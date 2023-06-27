@@ -18,6 +18,21 @@ export const createIngredient = cache(
   },
 );
 
+export const getIngredientByIngredientName = cache(
+  async (ingredientName: string) => {
+    const [ingredient] = await sql<Ingredient[]>`
+    SELECT
+      id
+    FROM
+    ingredients
+    WHERE
+      ingredient_name = ${ingredientName.toLowerCase()}
+ `;
+
+    return ingredient;
+  },
+);
+
 export const getAllIngredients = cache(async () => {
   const allIngredients = await sql<Ingredient[]>`
     SELECT
