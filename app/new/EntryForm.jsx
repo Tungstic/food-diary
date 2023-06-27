@@ -97,6 +97,10 @@ export default function EntryForm(props) {
         userId: currentUserId,
         dateOfMeal: mealDate,
         note: 'bla',
+        // sent the user's choice
+        // use ids of symptoms/i instead of names??
+        symptoms: [],
+        ingredients: [],
       }),
     });
 
@@ -136,7 +140,6 @@ export default function EntryForm(props) {
           onChange={handleSymptomChoice}
         />
       </div>
-
       <label htmlFor="note">
         Note
         <textarea
@@ -153,13 +156,13 @@ export default function EntryForm(props) {
           value={mealDate}
         />
       )}
-
       {newSymptom !== '' && (
         <button onClick={saveNewSymptom}>Save new symptom</button>
       )}
       {newIngredient !== '' && (
         <button onClick={saveNewIngredient}>Save new ingredient</button>
       )}
+      {/*   disable that button until new symptoms/i are saved to DB */}
       <button onClick={saveNewEntry}>Save the entry</button>
     </form>
   );

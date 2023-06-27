@@ -33,8 +33,11 @@ export async function POST(
 ): Promise<NextResponse<CreateEntryPost>> {
   const body = await request.json();
 
+  // check for session token and get user.id from it, not from body of EntryForm
+
   console.log('my body from api', body);
 
+  // check the values with zod (aren't allowed to be undefined or different data types)
   const newEntry = await createEntry(
     body.mealName,
     body.userId,
@@ -53,6 +56,8 @@ export async function POST(
     );
   }
 
+  // access newEntry.id to save to TABLES entries & ...
+
   return NextResponse.json(
     {
       entry: {
@@ -66,17 +71,11 @@ export async function POST(
   );
 }
 
-export async function GET(
-  request: NextRequest,
-): Promise<NextResponse<EntriesResponseBodyGet>> {
-  const body = await request.json();
-
-  console.log('my GET body from api entries', body);
-
+export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
+  // DO NOT USE A BODY which also means there's no request as a parameter in GET()
   const allEntries = await getAllEntries();
 
   console.log(allEntries);
-  // why does Postman get 500 error?
-  // why does allEntries have to be a value of key "entries"? where does that key come from?
+
   return NextResponse.json({ entries: allEntries });
 }
