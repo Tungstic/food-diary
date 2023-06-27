@@ -99,8 +99,8 @@ export default function EntryForm(props) {
         note: 'bla',
         // sent the user's choice
         // use ids of symptoms/i instead of names??
-        symptoms: [],
-        ingredients: [],
+        symptoms: symptomChoice,
+        ingredients: ingredientChoice,
       }),
     });
 

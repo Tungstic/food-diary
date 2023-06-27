@@ -5,12 +5,11 @@ import { sql } from './connect';
 export const getSymptomBySymptomName = cache(async (symptomName: string) => {
   const [symptom] = await sql<Symptom[]>`
     SELECT
-      id,
-      symptom_name
+      id
     FROM
       symptoms
     WHERE
-      symptoms.symptom_name = ${symptomName.toLowerCase()}
+      symptom_name = ${symptomName.toLowerCase()}
  `;
 
   return symptom;

@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createEntry, getAllEntries } from '../../../database/entries';
+import {
+  createEntry,
+  createEntryWithSymptom,
+  getAllEntries,
+} from '../../../database/entries';
+import { getSymptomBySymptomName } from '../../../database/symptoms';
 
 type Entry = {
   mealName: string;
@@ -57,6 +62,20 @@ export async function POST(
   }
 
   // access newEntry.id to save to TABLES entries & ...
+
+  const symptomChoice = body.symptoms;
+  for (const symptom of symptomChoice) {
+    const symptomId = await getSymptomBySymptomName(symptom);
+    console.log('symptomId is', symptomId);
+
+    if (symptomId) {
+      const newEntryWithSymptom = await createEntryWithSymptom(
+        symptomId.id,
+        newEntry.id,
+      );
+      console.log('newEntryWithSymptom', newEntryWithSymptom);
+    }
+  }
 
   return NextResponse.json(
     {
