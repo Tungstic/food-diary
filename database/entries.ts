@@ -96,9 +96,8 @@ export const getAllEntries = cache(async () => {
   return entries;
 });
 
-export const getEntriesByDate = cache(
-  async (dateOfMeal: Date, token: string) => {
-    const entries = await sql<Entry[]>`
+export const getTodaysEntries = cache(async (token: string) => {
+  const entries = await sql<Entry[]>`
     SELECT
       entries.*
     FROM
@@ -108,9 +107,8 @@ export const getEntriesByDate = cache(
       sessions.token = ${token} AND
       sessions.expiry_timestamp > now()
     )
-    LIMIT ${dateOfMeal}
+    WHERE entries.date_of_meal = now()
   `;
 
-    return entries;
-  },
-);
+  return entries;
+});
