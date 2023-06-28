@@ -27,12 +27,12 @@ type EntryWithIngredient = {
 }); */
 
 export const createEntry = cache(
-  async (mealName: string, userId: number, dateOfMeal: Date, note: string) => {
+  async (mealName: string, userId: number, note: string) => {
     const [entry] = await sql<Entry[]>`
     INSERT INTO entries
-      (meal_name, user_id, date_of_meal, note)
+      (meal_name, user_id, note)
     VALUES
-      (${mealName.toLowerCase()}, ${userId}, ${dateOfMeal}, ${note})
+      (${mealName.toLowerCase()}, ${userId}, ${note})
     RETURNING
       id,
       meal_name,
@@ -96,18 +96,13 @@ export const getAllEntries = cache(async () => {
   return entries;
 });
 
-export const getTodaysEntries = cache(async (token: string) => {
+export const getTodaysEntries = cache(async () => {
   const entries = await sql<Entry[]>`
     SELECT
-      entries.*
+      *
     FROM
       entries
-    INNER JOIN sessions ON (
-      entries.user_id = sessions.user_id AND
-      sessions.token = ${token} AND
-      sessions.expiry_timestamp > now()
-    )
-    WHERE entries.date_of_meal = now()
+    WHERE entries.date_of_meal = CURRENT_DATE;
   `;
 
   return entries;

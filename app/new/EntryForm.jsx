@@ -95,7 +95,6 @@ export default function EntryForm(props) {
       body: JSON.stringify({
         mealName: mealName,
         userId: currentUserId,
-        dateOfMeal: mealDate,
         note: 'bla',
         // sent the user's choice
         // use ids of symptoms/i instead of names??

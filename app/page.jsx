@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { getUserBySessionToken } from '../database/users';
 import MyCalendar from './components/Calendar';
+import TodaysEntries from './TodaysEntries';
 
 export default async function HomePage() {
   // 1. get the session token from the cookie
@@ -19,10 +20,12 @@ export default async function HomePage() {
       </>
     );
   }
+
   return (
     <>
       <div>{`Welcome back, ${user.username}`}</div>
-      <div>Your today's entries</div>
+
+      <TodaysEntries />
       <MyCalendar />
     </>
   );

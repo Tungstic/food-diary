@@ -5,6 +5,7 @@ import {
   createEntryWithIngredient,
   createEntryWithSymptom,
   getAllEntries,
+  getTodaysEntries,
 } from '../../../database/entries';
 import { getIngredientByIngredientName } from '../../../database/ingredients';
 import { getValidSessionByToken } from '../../../database/sessions';
@@ -47,12 +48,7 @@ export async function POST(
   console.log('my body from api', body);
 
   // check the values with zod (aren't allowed to be undefined or different data types)
-  const newEntry = await createEntry(
-    body.mealName,
-    body.userId,
-    body.dateOfMeal,
-    body.note,
-  );
+  const newEntry = await createEntry(body.mealName, body.userId, body.note);
 
   console.log('my new entry', newEntry);
 
@@ -106,39 +102,10 @@ export async function POST(
   );
 }
 
-export async function GET(
-  request: NextRequest,
-): Promise<NextResponse<EntriesResponseBodyGet>> {
+export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
   // DO NOT USE A BODY which also means there's no request as a parameter in GET()
-  const { searchParams } = new URL(request.url);
 
-  console.log('this is sParams for GET', searchParams);
-  const sessionTokenCookie = cookies().get('sessionToken');
-  const session =
-    sessionTokenCookie &&
-    (await getValidSessionByToken(sessionTokenCookie.value));
+  const todaysEntries = await getTodaysEntries();
 
-  if (!session) {
-    return NextResponse.json(
-      {
-        error: 'session token is not valid',
-      },
-      { status: 401 },
-    );
-  }
-
-  const limit = searchParams.get('date');
-
-  if (!limit) {
-    return NextResponse.json(
-      {
-        error: 'Date needs to be passed as param',
-      },
-      { status: 400 },
-    );
-  }
-
-  const allEntries = await getAllEntries();
-
-  return NextResponse.json({ entries: allEntries });
+  return NextResponse.json({ entries: todaysEntries });
 }
