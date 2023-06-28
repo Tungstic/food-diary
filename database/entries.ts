@@ -95,3 +95,22 @@ export const getAllEntries = cache(async () => {
   `;
   return entries;
 });
+
+export const getEntriesByDate = cache(
+  async (dateOfMeal: Date, token: string) => {
+    const entries = await sql<Entry[]>`
+    SELECT
+      entries.*
+    FROM
+      entries
+    INNER JOIN sessions ON (
+      entries.user_id = sessions.user_id AND
+      sessions.token = ${token} AND
+      sessions.expiry_timestamp > now()
+    )
+    LIMIT ${dateOfMeal}
+  `;
+
+    return entries;
+  },
+);

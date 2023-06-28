@@ -22,6 +22,7 @@ export default async function HomePage() {
   return (
     <>
       <div>{`Welcome back, ${user.username}`}</div>
+      <div>Your today's entries</div>
       <MyCalendar />
     </>
   );

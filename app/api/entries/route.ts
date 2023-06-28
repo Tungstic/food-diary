@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import {
   createEntry,
@@ -6,6 +7,7 @@ import {
   getAllEntries,
 } from '../../../database/entries';
 import { getIngredientByIngredientName } from '../../../database/ingredients';
+import { getValidSessionByToken } from '../../../database/sessions';
 import { getSymptomBySymptomName } from '../../../database/symptoms';
 
 type Entry = {
@@ -33,7 +35,7 @@ export type CreateEntryPost =
     }
   | Error;
 
-type EntriesResponseBodyGet = { entries: EntryFromDB[] | Error };
+type EntriesResponseBodyGet = { entries: Entry[] } | Error;
 
 export async function POST(
   request: NextRequest,
@@ -104,11 +106,39 @@ export async function POST(
   );
 }
 
-export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
+export async function GET(
+  request: NextRequest,
+): Promise<NextResponse<EntriesResponseBodyGet>> {
   // DO NOT USE A BODY which also means there's no request as a parameter in GET()
-  const allEntries = await getAllEntries();
+  const { searchParams } = new URL(request.url);
 
-  console.log(allEntries);
+  console.log('this is sParams for GET', searchParams);
+  const sessionTokenCookie = cookies().get('sessionToken');
+  const session =
+    sessionTokenCookie &&
+    (await getValidSessionByToken(sessionTokenCookie.value));
+
+  if (!session) {
+    return NextResponse.json(
+      {
+        error: 'session token is not valid',
+      },
+      { status: 401 },
+    );
+  }
+
+  const limit = searchParams.get('date');
+
+  if (!limit) {
+    return NextResponse.json(
+      {
+        error: 'Date needs to be passed as param',
+      },
+      { status: 400 },
+    );
+  }
+
+  const allEntries = await getAllEntries();
 
   return NextResponse.json({ entries: allEntries });
 }
