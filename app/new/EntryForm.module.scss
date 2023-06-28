@@ -3,6 +3,10 @@
   margin: 16px;
   flex-direction: column;
   gap: 8px;
+
+  .dish {
+    margin-left: 8px;
+  }
 }
 .symptomsInput {
   display: flex;
@@ -15,4 +19,8 @@
   & > .select {
     flex: 2;
   }
+}
+
+.note {
+  margin-left: 8px;
 }

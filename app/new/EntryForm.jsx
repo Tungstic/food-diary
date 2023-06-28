@@ -115,6 +115,7 @@ export default function EntryForm(props) {
         Name your meal (e.g. pizza, soup with dumplings, cevapcici)
         <input
           required
+          className={styles.dish}
           onChange={(event) => setMealName(event.currentTarget.value)}
         />
       </label>
@@ -130,9 +131,8 @@ export default function EntryForm(props) {
         />
       </div>
       <div className={styles.symptomsInput}>
-        <div>Choose symptoms you're experiencing</div>
+        <div>Choose symptoms if you're experiencing any</div>
         <CreatableSelect
-          required
           className={styles.select}
           isMulti
           isSearchable
@@ -143,6 +143,7 @@ export default function EntryForm(props) {
       <label htmlFor="note">
         Note
         <textarea
+          className={styles.note}
           name="note"
           maxLength={150}
           placeholder="Feeling heavy after food"
