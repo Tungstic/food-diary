@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { getUserBySessionToken } from '../database/users';
 import MyCalendar from './components/Calendar';
+import styles from './Home.module.scss';
 import TodaysEntries from './TodaysEntries';
 
 export default async function HomePage() {
@@ -22,11 +23,9 @@ export default async function HomePage() {
   }
 
   return (
-    <>
-      <div>{`Welcome back, ${user.username}`}</div>
-
+    <div className={styles.content}>
       <TodaysEntries />
       <MyCalendar />
-    </>
+    </div>
   );
 }
