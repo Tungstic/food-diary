@@ -114,10 +114,14 @@ export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
 
   const onlyEntriesIds = todaysEntries.map((todaysEntry) => todaysEntry.id);
 
+  const ingredientNames = [];
   for (const onlyEntriesId of onlyEntriesIds) {
     const ingredientName = await getIngredientByEntryId(onlyEntriesId);
-    console.log(ingredientName);
+    ingredientNames.push(ingredientName);
   }
 
-  return NextResponse.json({ entries: todaysEntries });
+  return NextResponse.json({
+    entries: todaysEntries,
+    ingredients: ingredientNames,
+  });
 }
