@@ -2,6 +2,7 @@
 
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import DatePicker from 'react-date-picker';
 import CreatableSelect from 'react-select/creatable';
@@ -23,6 +24,7 @@ export default function EntryForm(props) {
   // Date Picker only rendered after page's mounted (to avoid hydration error)
   const [hasMounted, setHasMounted] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const router = useRouter();
 
   useEffect(() => setHasMounted(true), []);
 
@@ -110,8 +112,11 @@ export default function EntryForm(props) {
     });
 
     const data = await response.json();
-
     console.log('new entry', data);
+
+    if (data) {
+      router.push('/');
+    }
   }
 
   return (
