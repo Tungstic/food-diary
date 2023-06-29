@@ -11,8 +11,8 @@ export default function EntryForm(props) {
   // CreatableSelect: newOption is array of input objects (user's choice)
   // {value: '', label: '', __isNew__: boolean}
   // array of strings (symptoms/ingredients) that represent only user's choice - TO BE SENT TO ENTRIES & tables
-  let symptomChoice = [];
-  let ingredientChoice = [];
+  const [symptomChoice, setSymptomChoice] = useState([]);
+  let [ingredientChoice, setIngredientChoice] = useState([]);
   // value property from the above object (created by user, new to DB)
   const [newSymptom, setNewSymptom] = useState('');
   const [newIngredient, setNewIngredient] = useState('');
@@ -22,6 +22,7 @@ export default function EntryForm(props) {
   const [mealDate, setMealDate] = useState(Date());
   // Date Picker only rendered after page's mounted (to avoid hydration error)
   const [hasMounted, setHasMounted] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => setHasMounted(true), []);
 
@@ -44,7 +45,7 @@ export default function EntryForm(props) {
   });
 
   function handleIngredientChoice(newOption) {
-    ingredientChoice = newOption.map((option) => option.value);
+    setIngredientChoice(newOption.map((option) => option.value));
     console.log(ingredientChoice);
     // find the new ingredient created by user (if any)
     const usersInput = newOption.find((option) => option.__isNew__ === true);
@@ -54,7 +55,7 @@ export default function EntryForm(props) {
   }
 
   function handleSymptomChoice(newOption) {
-    symptomChoice = newOption.map((option) => option.value);
+    setSymptomChoice(newOption.map((option) => option.value));
 
     console.log(symptomChoice);
     // find the new symptom created by user (if any)
@@ -73,6 +74,10 @@ export default function EntryForm(props) {
     const data = await response.json();
 
     console.log('new symptom from user', data);
+
+    if (data) {
+      setIsDisabled(false);
+    }
   }
 
   async function saveNewIngredient() {
@@ -86,9 +91,10 @@ export default function EntryForm(props) {
 
     const data = await response.json();
 
-    console.log('new ingredient from user', data);
+    if (data) {
+      setIsDisabled(false);
+    }
   }
-
   async function saveNewEntry() {
     const response = await fetch('/api/entries', {
       method: 'POST',
@@ -163,7 +169,9 @@ export default function EntryForm(props) {
         <button onClick={saveNewIngredient}>Save new ingredient</button>
       )}
       {/*   disable that button until new symptoms/i are saved to DB */}
-      <button onClick={saveNewEntry}>Save the entry</button>
+      <button disabled={isDisabled} onClick={saveNewEntry}>
+        Save the entry
+      </button>
     </form>
   );
 }

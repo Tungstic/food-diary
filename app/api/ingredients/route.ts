@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createIngredient } from '../../../database/ingredients';
 
 type Ingredient = {
+  id: number;
   ingredientName: string;
   userId: number;
 };
@@ -42,6 +43,7 @@ export async function POST(
   return NextResponse.json(
     {
       ingredient: {
+        id: newIngredient.id,
         ingredientName: newIngredient.ingredientName,
         userId: newIngredient.userId,
       },

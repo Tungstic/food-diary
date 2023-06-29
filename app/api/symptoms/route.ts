@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createSymptom } from '../../../database/symptoms';
 
-type Symptom = {
+type SymptomInput = {
+  symptomName: string;
+  userId: number;
+};
+
+type SymptomFromDB = {
+  id: number;
   symptomName: string;
   userId: number;
 };
@@ -12,7 +18,7 @@ type Error = {
 
 export type CreateSymptomPost =
   | {
-      symptom: Symptom;
+      symptom: SymptomFromDB;
     }
   | Error;
 
@@ -39,6 +45,7 @@ export async function POST(
   return NextResponse.json(
     {
       symptom: {
+        id: newSymptom.id,
         symptomName: newSymptom.symptomName,
         userId: newSymptom.userId,
       },
