@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createSymptom } from '../../../database/symptoms';
 
-type SymptomInput = {
-  symptomName: string;
-  userId: number;
-};
-
 type SymptomFromDB = {
   id: number;
   symptomName: string;
