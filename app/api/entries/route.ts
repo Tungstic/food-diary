@@ -4,7 +4,6 @@ import {
   createEntry,
   createEntryWithIngredient,
   createEntryWithSymptom,
-  getAllEntries,
   getTodaysEntries,
 } from '../../../database/entries';
 import {
@@ -13,6 +12,7 @@ import {
 } from '../../../database/ingredients';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { getSymptomBySymptomName } from '../../../database/symptoms';
+import { Session } from '../../../migrations/1687027690-createSessionsTable';
 
 type Entry = {
   mealName: string;
@@ -121,7 +121,7 @@ export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
   }
   console.log('session token is', session);
 
-  const todaysEntries = await getTodaysEntries();
+  const todaysEntries = await getTodaysEntries(session.userId);
 
   let expandedEntry;
   const expandedEntryArray = [];
