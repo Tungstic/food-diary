@@ -7,7 +7,10 @@ import {
   getAllEntries,
   getTodaysEntries,
 } from '../../../database/entries';
-import { getIngredientByIngredientName } from '../../../database/ingredients';
+import {
+  getIngredientByEntryId,
+  getIngredientByIngredientName,
+} from '../../../database/ingredients';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { getSymptomBySymptomName } from '../../../database/symptoms';
 
@@ -106,6 +109,15 @@ export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
   // DO NOT USE A BODY which also means there's no request as a parameter in GET()
 
   const todaysEntries = await getTodaysEntries();
+
+  console.log('todaysEntries', todaysEntries);
+
+  const onlyEntriesIds = todaysEntries.map((todaysEntry) => todaysEntry.id);
+
+  for (const onlyEntriesId of onlyEntriesIds) {
+    const ingredientName = await getIngredientByEntryId(onlyEntriesId);
+    console.log(ingredientName);
+  }
 
   return NextResponse.json({ entries: todaysEntries });
 }

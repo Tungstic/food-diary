@@ -24,7 +24,12 @@ export default function TodaysEntries() {
         <div>The meals you logged today</div>
         <div>
           {listOfEntries.map((entry) => {
-            return <div key={`meal number ${entry.id}`}>{entry.mealName}</div>;
+            return (
+              <div key={`meal number ${entry.id}`}>
+                <div>{entry.mealName}</div>
+                <div>{entry.note}</div>
+              </div>
+            );
           })}
         </div>
       </div>

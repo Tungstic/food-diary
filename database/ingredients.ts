@@ -33,6 +33,17 @@ export const getIngredientByIngredientName = cache(
   },
 );
 
+export const getIngredientByEntryId = cache(async (entryId: number) => {
+  const [ingredient] = await sql<Ingredient[]>`
+    SELECT ingredient_name
+    FROM ingredients
+    INNER JOIN entries_and_ingredients ON
+    ingredients.id = entries_and_ingredients.ingredient_id
+    WHERE entry_id = ${entryId}
+    `;
+  return ingredient;
+});
+
 export const getAllIngredients = cache(async () => {
   const allIngredients = await sql<Ingredient[]>`
     SELECT
