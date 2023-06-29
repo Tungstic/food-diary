@@ -112,16 +112,23 @@ export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
 
   console.log('todaysEntries', todaysEntries);
 
-  const onlyEntriesIds = todaysEntries.map((todaysEntry) => todaysEntry.id);
+  let expandedEntry;
+  const expandedEntryArray = [];
 
-  const ingredientNames = [];
-  for (const onlyEntriesId of onlyEntriesIds) {
-    const ingredientName = await getIngredientByEntryId(onlyEntriesId);
-    ingredientNames.push(ingredientName);
+  for (const todaysEntry of todaysEntries) {
+    const ingredientName = await getIngredientByEntryId(todaysEntry.id);
+
+    console.log('see here', ingredientName);
+    // array of objects key: ingredientName, value: string (name)
+    const onlyIngredientNames = ingredientName.map((obj) => obj.ingredientName);
+
+    expandedEntry = { ...todaysEntry, onlyIngredientNames };
+    expandedEntryArray.push(expandedEntry);
   }
 
+  console.log('todaysEntries mutated?', expandedEntryArray);
+
   return NextResponse.json({
-    entries: todaysEntries,
-    ingredients: ingredientNames,
+    entries: expandedEntryArray,
   });
 }
