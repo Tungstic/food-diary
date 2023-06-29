@@ -21,7 +21,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body>
+      <body style={{ overflow: 'scroll' }}>
         <header>
           <nav>
             {user ? (
