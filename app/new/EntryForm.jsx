@@ -12,7 +12,7 @@ export default function EntryForm(props) {
   // {value: '', label: '', __isNew__: boolean}
   // array of strings (symptoms/ingredients) that represent only user's choice - TO BE SENT TO ENTRIES & tables
   const [symptomChoice, setSymptomChoice] = useState([]);
-  let [ingredientChoice, setIngredientChoice] = useState([]);
+  const [ingredientChoice, setIngredientChoice] = useState([]);
   // value property from the above object (created by user, new to DB)
   const [newSymptom, setNewSymptom] = useState('');
   const [newIngredient, setNewIngredient] = useState('');
@@ -169,9 +169,16 @@ export default function EntryForm(props) {
         <button onClick={saveNewIngredient}>Save new ingredient</button>
       )}
       {/*   disable that button until new symptoms/i are saved to DB */}
-      <button disabled={isDisabled} onClick={saveNewEntry}>
-        Save the entry
-      </button>
+      {mealName !== '' &&
+      ingredientChoice.length > 0 &&
+      newIngredient === '' &&
+      newSymptom === '' ? (
+        <button onClick={saveNewEntry}>Save the entry</button>
+      ) : (
+        <button disabled={isDisabled} onClick={saveNewEntry}>
+          Save the entry
+        </button>
+      )}
     </form>
   );
 }
