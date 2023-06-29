@@ -8,6 +8,7 @@
   float: right;
   margin-right: 32px;
   box-shadow: 12px 12px 2px 1px #c7d2fe;
+  max-height: 350px;
 }
 
 .react-calendar--doubleView {
