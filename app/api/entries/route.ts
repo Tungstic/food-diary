@@ -12,7 +12,6 @@ import {
 } from '../../../database/ingredients';
 import { getValidSessionByToken } from '../../../database/sessions';
 import { getSymptomBySymptomName } from '../../../database/symptoms';
-import { Session } from '../../../migrations/1687027690-createSessionsTable';
 
 type Entry = {
   mealName: string;
@@ -47,11 +46,23 @@ export async function POST(
   const body = await request.json();
 
   // check for session token and get user.id from it, not from body of EntryForm
+  const sessionTokenCookie = cookies().get('sessionToken');
+  const session =
+    sessionTokenCookie &&
+    (await getValidSessionByToken(sessionTokenCookie.value));
+  if (!session) {
+    return NextResponse.json(
+      {
+        error: 'session token is not valid',
+      },
+      { status: 401 },
+    );
+  }
 
   console.log('my body from api', body);
 
   // check the values with zod (aren't allowed to be undefined or different data types)
-  const newEntry = await createEntry(body.mealName, body.userId, body.note);
+  const newEntry = await createEntry(body.mealName, session.userId, body.note);
 
   console.log('my new entry', newEntry);
 
