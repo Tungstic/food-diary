@@ -107,10 +107,21 @@ export async function POST(
 
 export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
   // DO NOT USE A BODY which also means there's no request as a parameter in GET()
+  const sessionTokenCookie = cookies().get('sessionToken');
+  const session =
+    sessionTokenCookie &&
+    (await getValidSessionByToken(sessionTokenCookie.value));
+  if (!session) {
+    return NextResponse.json(
+      {
+        error: 'session token is not valid',
+      },
+      { status: 401 },
+    );
+  }
+  console.log('session token is', session);
 
   const todaysEntries = await getTodaysEntries();
-
-  console.log('todaysEntries', todaysEntries);
 
   let expandedEntry;
   const expandedEntryArray = [];
