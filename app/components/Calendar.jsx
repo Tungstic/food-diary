@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 
 export default function MyCalendar() {
-  const [value, setValue] = useState(new Date());
+  const timeOfMeal = new Date();
+  const [value, setValue] = useState(timeOfMeal.toISOString());
 
   /* async function getEntriesByDate(dateOfEntry, userId) {
     const response = await fetch(`http://localhost:3000/api/entries?date=${dateOfEntry}`);
