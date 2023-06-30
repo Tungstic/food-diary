@@ -1,11 +1,10 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import CreatableSelect from 'react-select/creatable';
 import { getAllIngredients } from '../../database/ingredients';
 import { getAllSymptoms } from '../../database/symptoms';
 import { getUserBySessionToken } from '../../database/users';
-import InputForm from './InputForm';
+import styles from './page.module.scss';
 
 export default async function ProfileUsernamePage() {
   // 1. get the session token from the cookie
@@ -23,6 +22,11 @@ export default async function ProfileUsernamePage() {
   const symptoms = await getAllSymptoms();
   const ingredients = await getAllIngredients();
 
+  const symptomList = symptoms.map((symptom) => symptom.symptomName);
+  const ingredientList = ingredients.map(
+    (ingredient) => ingredient.ingredientName,
+  );
+
   return (
     <>
       <div>{`Hello, ${user.username.at(0)?.toUpperCase()}${user.username.slice(
@@ -36,8 +40,26 @@ export default async function ProfileUsernamePage() {
           a new entry
         </Link>
       </div>
-
-      <InputForm symptoms={symptoms} user={user.id} ingredients={ingredients} />
+      <div className={styles.readOnlyLists}>
+        <div className={styles.symptoms}>
+          Symptoms
+          <ul>
+            {symptomList.map((singleSymptom) => {
+              return <li key={`symptom ${singleSymptom}`}>{singleSymptom}</li>;
+            })}
+          </ul>
+        </div>
+        <div className={styles.symptoms}>
+          Ingredients
+          <ul>
+            {ingredientList.map((singleIngredient) => {
+              return (
+                <li key={`symptom ${singleIngredient}`}>{singleIngredient}</li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
     </>
   );
 }
