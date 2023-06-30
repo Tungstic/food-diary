@@ -130,7 +130,6 @@ export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
       { status: 401 },
     );
   }
-  console.log('session token is', session);
 
   const todaysEntries = await getTodaysEntries(session.userId);
 
@@ -140,7 +139,6 @@ export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
   for (const todaysEntry of todaysEntries) {
     const ingredientName = await getIngredientByEntryId(todaysEntry.id);
 
-    console.log('see here', ingredientName);
     // array of objects key: ingredientName, value: string (name)
     const onlyIngredientNames = ingredientName.map((obj) => obj.ingredientName);
 

@@ -7,9 +7,13 @@ import Calendar from 'react-calendar';
 export default function MyCalendar() {
   const [value, setValue] = useState(new Date());
 
+  async function getEntriesByDate(date, userId) {
+    const response = await fetch(`http://localhost:3000/api/entries/${date}`);
+  }
+
   return (
     <Calendar
-      // onClickDay={(event) => alert('Hello')} - attach my fn for redirect to entries on that day
+      onClickDay={() => alert('Hello')}
       onChange={setValue}
       value={value}
       locale="en-GB"
