@@ -7,8 +7,14 @@ import Calendar from 'react-calendar';
 export default function MyCalendar() {
   const [value, setValue] = useState(new Date());
 
-  /* async function getEntriesByDate(date, userId) {
-    const response = await fetch(`http://localhost:3000/api/entries/${date}`);
+  /* async function getEntriesByDate(dateOfEntry, userId) {
+    const response = await fetch(`http://localhost:3000/api/entries?date=${dateOfEntry}`);
+    const data = await response.json();
+    console.log(data);
+
+    if(data) {
+      show the list of that day's entries
+    }
   } */
 
   return (
