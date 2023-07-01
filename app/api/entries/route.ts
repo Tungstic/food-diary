@@ -5,7 +5,6 @@ import {
   createEntryWithIngredient,
   createEntryWithSymptom,
   getEntriesByDate,
-  getTodaysEntries,
 } from '../../../database/entries';
 import {
   getIngredientByEntryId,
@@ -146,24 +145,23 @@ export async function GET(
   }
 
   const entries = await getEntriesByDate(session.userId, requiredDate);
-  /* const todaysEntries = await getEntriesByDate(session.userId, requiredDate); */
 
-  /* let expandedEntry;
+  let expandedEntry;
   const expandedEntryArray = [];
 
-  for (const todaysEntry of todaysEntries) {
-    const ingredientName = await getIngredientByEntryId(todaysEntry.id);
+  for (const entry of entries) {
+    const ingredientName = await getIngredientByEntryId(entry.id);
 
     // array of objects key: ingredientName, value: string (name)
     const onlyIngredientNames = ingredientName.map((obj) => obj.ingredientName);
 
-    expandedEntry = { ...todaysEntry, onlyIngredientNames };
+    expandedEntry = { ...entry, onlyIngredientNames };
     expandedEntryArray.push(expandedEntry);
   }
 
-  console.log('todaysEntries mutated?', expandedEntryArray); */
+  console.log('todaysEntries mutated?', expandedEntryArray);
 
   return NextResponse.json({
-    entries: entries,
+    entries: expandedEntryArray,
   });
 }

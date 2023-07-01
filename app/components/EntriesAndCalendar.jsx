@@ -10,11 +10,9 @@ import Calendar from 'react-calendar';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export default function EntriesAndCalendar(props) {
+export default function EntriesAndCalendar() {
   const [listOfEntries, setListOfEntries] = useState([]);
   const [value, setValue] = useState(new Date());
-
-  const currentUserId = props.user;
 
   useEffect(() => {
     const requiredDate = dayjs(value).format();
@@ -56,12 +54,12 @@ export default function EntriesAndCalendar(props) {
                 <li key={`meal number ${entry.id}`}>
                   <div>{`Meal ${entry.mealName}`}</div>
                   <div>Note:{entry.note}</div>
-                  {/* <div>
+                  <div>
                     Ingredients:
                     {entry.onlyIngredientNames.map((i) => {
                       return <div key={`ingredient ${i}`}>{i}</div>;
                     })}
-                  </div> */}
+                  </div>
                 </li>
               );
             })}

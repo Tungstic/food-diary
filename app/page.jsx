@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers';
 import { getUserBySessionToken } from '../database/users';
-import MyCalendar from './components/EntriesAndCalendar';
-import TodaysEntries from './EntriesByDate';
+import EntriesAndCalendar from './components/EntriesAndCalendar';
 import styles from './Home.module.scss';
 
 export default async function HomePage() {
@@ -24,7 +23,7 @@ export default async function HomePage() {
 
   return (
     <div className={styles.content}>
-      <MyCalendar user={user.id} />
+      <EntriesAndCalendar />
     </div>
   );
 }
