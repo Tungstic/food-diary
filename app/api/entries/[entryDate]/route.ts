@@ -1,4 +1,4 @@
-import { cookies } from 'next/headers';
+/* import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { getTodaysEntries } from '../../../../database/entries';
 import { getValidSessionByToken } from '../../../../database/sessions';
@@ -40,3 +40,4 @@ export async function GET(
 
   return NextResponse.json({ entries: entries });
 }
+ */
