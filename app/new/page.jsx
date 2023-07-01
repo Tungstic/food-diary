@@ -23,7 +23,9 @@ export default async function NewEntryPage() {
 
   return (
     <>
-      <div>Dear username, make a new entry here</div>
+      <div style={{ marginLeft: '16px' }}>{`Welcome back, ${user.username
+        .at(0)
+        ?.toUpperCase()}${user.username.slice(1)}`}</div>
       <EntryForm symptoms={symptoms} user={user.id} ingredients={ingredients} />
     </>
   );
