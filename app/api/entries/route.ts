@@ -4,6 +4,7 @@ import {
   createEntry,
   createEntryWithIngredient,
   createEntryWithSymptom,
+  getEntriesByDate,
   getTodaysEntries,
 } from '../../../database/entries';
 import {
@@ -116,7 +117,10 @@ export async function POST(
   );
 }
 
-export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
+export async function GET(
+  request: NextRequest,
+): Promise<NextResponse<EntriesResponseBodyGet>> {
+  const { searchParams } = new URL(request.url);
   // DO NOT USE A BODY which also means there's no request as a parameter in GET()
   const sessionTokenCookie = cookies().get('sessionToken');
   const session =
@@ -131,9 +135,20 @@ export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
     );
   }
 
-  const todaysEntries = await getTodaysEntries(session.userId);
+  const requiredDate = searchParams.get('date');
+  if (!requiredDate) {
+    return NextResponse.json(
+      {
+        error: 'Date needs to be passed as param',
+      },
+      { status: 400 },
+    );
+  }
 
-  let expandedEntry;
+  const entries = await getEntriesByDate(session.userId, requiredDate);
+  /* const todaysEntries = await getEntriesByDate(session.userId, requiredDate); */
+
+  /* let expandedEntry;
   const expandedEntryArray = [];
 
   for (const todaysEntry of todaysEntries) {
@@ -146,9 +161,9 @@ export async function GET(): Promise<NextResponse<EntriesResponseBodyGet>> {
     expandedEntryArray.push(expandedEntry);
   }
 
-  console.log('todaysEntries mutated?', expandedEntryArray);
+  console.log('todaysEntries mutated?', expandedEntryArray); */
 
   return NextResponse.json({
-    entries: expandedEntryArray,
+    entries: entries,
   });
 }

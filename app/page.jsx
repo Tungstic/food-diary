@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers';
 import { getUserBySessionToken } from '../database/users';
-import MyCalendar from './components/Calendar';
+import MyCalendar from './components/EntriesAndCalendar';
+import TodaysEntries from './EntriesByDate';
 import styles from './Home.module.scss';
-import TodaysEntries from './TodaysEntries';
 
 export default async function HomePage() {
   // 1. get the session token from the cookie
@@ -24,8 +24,7 @@ export default async function HomePage() {
 
   return (
     <div className={styles.content}>
-      <TodaysEntries />
-      <MyCalendar />
+      <MyCalendar user={user.id} />
     </div>
   );
 }

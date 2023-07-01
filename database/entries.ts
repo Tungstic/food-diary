@@ -96,13 +96,13 @@ export const getAllEntries = cache(async () => {
   return entries;
 });
 
-export const getTodaysEntries = cache(async (userId: number) => {
+export const getEntriesByDate = cache(async (userId: number, date: string) => {
   const entries = await sql<Entry[]>`
     SELECT
       *
     FROM
       entries
-    WHERE entries.date_of_meal = CURRENT_DATE AND user_id = ${userId}
+    WHERE entries.date_of_meal = ${date} AND user_id = ${userId}
   `;
 
   return entries;
