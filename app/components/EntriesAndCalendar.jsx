@@ -2,14 +2,9 @@
 
 import './Calendar.css';
 import dayjs from 'dayjs';
-import timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import styles from './EntriesAndCalendar.module.scss';
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 export default function EntriesAndCalendar() {
   const [listOfEntries, setListOfEntries] = useState([]);
