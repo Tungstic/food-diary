@@ -13,7 +13,7 @@ export async function up(sql: Sql) {
     CREATE TABLE entries (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       meal_name varchar (50) NOT NULL,
-      user_id integer NOT NULL REFERENCES users (id),
+      user_id integer NOT NULL REFERENCES users (id) ON DELETE CASCADE,
       date_of_meal timestamp NOT NULL,
       note varchar (200)
     )

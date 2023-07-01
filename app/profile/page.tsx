@@ -37,12 +37,12 @@ export default async function ProfileUsernamePage() {
       <div className={styles.hello}>
         This is your profile. Here you can see the full list of symptoms and
         ingredients and add to it. You can also create new symptoms and/or
-        ingredients while making{' '}
+        ingredients while making a{' '}
         <Link
           style={{ textDecoration: 'underline', textUnderlineOffset: '4px' }}
           href="/new"
         >
-          a new entry.
+          new entry.
         </Link>
       </div>
       <div className={styles.readOnlyLists}>

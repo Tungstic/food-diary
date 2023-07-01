@@ -5,7 +5,7 @@ export async function up(sql: Sql) {
     CREATE TABLE entries_and_symptoms (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       symptom_id integer NOT NULL REFERENCES symptoms (id),
-      entry_id integer NOT NULL REFERENCES entries (id)
+      entry_id integer NOT NULL REFERENCES entries (id) ON DELETE CASCADE
     )
   `;
 }
