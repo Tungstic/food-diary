@@ -6,6 +6,7 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
+import styles from './EntriesAndCalendar.module.scss';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -37,7 +38,7 @@ export default function EntriesAndCalendar() {
   if (listOfEntries.length < 1) {
     return (
       <>
-        <div style={{ margin: '16px' }}>No meals logged</div>;
+        <div style={{ margin: '16px' }}>No meals logged</div>
         <Calendar value={value} onChange={setValue} locale="en-GB" />
       </>
     );
@@ -45,16 +46,21 @@ export default function EntriesAndCalendar() {
 
   if (listOfEntries.length > 0) {
     return (
-      <div>
+      <div className={styles.withEntries}>
         <div>
-          <div style={{ margin: '16px' }}>The meals you logged</div>
+          <div style={{ margin: '16px' }}>{`The meals you logged on ${value
+            .toString()
+            .slice(0, 10)}`}</div>
           <ul>
             {listOfEntries.map((entry) => {
               return (
-                <li key={`meal number ${entry.id}`}>
+                <li
+                  className={styles.singleEntry}
+                  key={`meal number ${entry.id}`}
+                >
                   <div>{`Meal ${entry.mealName}`}</div>
                   <div>Note:{entry.note}</div>
-                  <div>
+                  <div className={styles.listOfIngredients}>
                     Ingredients:
                     {entry.onlyIngredientNames.map((i) => {
                       return <div key={`ingredient ${i}`}>{i}</div>;
@@ -70,13 +76,3 @@ export default function EntriesAndCalendar() {
     );
   }
 }
-
-/* async function getEntriesByDate(dateOfEntry, userId) {
-    const response = await fetch(`http://localhost:3000/api/entries?date=${dateOfEntry}`);
-    const data = await response.json();
-    console.log(data);
-
-    if(data) {
-      show the list of that day's entries
-    }
-  } */

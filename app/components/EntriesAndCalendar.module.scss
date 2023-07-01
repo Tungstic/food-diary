@@ -1,0 +1,14 @@
+.withEntries {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.listOfIngredients {
+  display: flex;
+  gap: 8px;
+}
+
+.singleEntry {
+  margin: 16px;
+  background-color: aquamarine;
+}
