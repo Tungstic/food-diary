@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation';
 import { getAllIngredients } from '../../database/ingredients';
 import { getAllSymptoms } from '../../database/symptoms';
 import { getUserBySessionToken } from '../../database/users';
-import InputForm from './InputForm';
 import styles from './page.module.scss';
+import SymptomInputForm from './SymptomInputForm';
 
 export default async function ProfileUsernamePage() {
   // 1. get the session token from the cookie
@@ -42,10 +42,9 @@ export default async function ProfileUsernamePage() {
         </Link>
       </div>
       <div className={styles.readOnlyLists}>
-        <InputForm />
-        <InputForm />
+        <SymptomInputForm user={user.id} />
+        <div />
         <div className={styles.symptoms}>
-          symptom
           <ul>
             {symptomList.map((singleSymptom) => {
               return <li key={`symptom ${singleSymptom}`}>{singleSymptom}</li>;
