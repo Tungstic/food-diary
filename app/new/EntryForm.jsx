@@ -2,11 +2,17 @@
 
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
+import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import DatePicker from 'react-date-picker';
 import CreatableSelect from 'react-select/creatable';
 import styles from './EntryForm.module.scss';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export default function EntryForm(props) {
   // CreatableSelect: newOption is array of input objects (user's choice)
@@ -20,7 +26,7 @@ export default function EntryForm(props) {
   // string as a name, input's text value
   const [mealName, setMealName] = useState('');
   // current local date (with time) for Date Picker
-  const [mealDate, setMealDate] = useState(Date());
+  const [mealDate, setMealDate] = useState(new Date());
   // Date Picker only rendered after page's mounted (to avoid hydration error)
   const [hasMounted, setHasMounted] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -98,11 +104,14 @@ export default function EntryForm(props) {
     }
   }
   async function saveNewEntry() {
+    const isoDate = mealDate.toISOString();
+
     const response = await fetch('/api/entries', {
       method: 'POST',
       body: JSON.stringify({
         mealName: mealName,
         userId: currentUserId,
+        dateOfMeal: isoDate,
         note: 'bla',
         // sent the user's choice
         // use ids of symptoms/i instead of names??
@@ -113,6 +122,8 @@ export default function EntryForm(props) {
 
     const data = await response.json();
     console.log('new entry', data);
+    const testTime = dayjs.tz(data.dateOfMeal, 'Europe/Vienna');
+    console.log(testTime.format());
 
     if (data) {
       router.push('/');

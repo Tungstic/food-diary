@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/node": "20.3.1",
     "bcrypt": "^5.1.0",
+    "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",
     "dotenv-cli": "^7.2.1",
     "dotenv-safe": "^8.2.0",
