@@ -47,6 +47,7 @@ export const getAllSymptoms = cache(async () => {
   const symptoms = await sql<Symptom[]>`
     SELECT *
     FROM symptoms
+    ORDER BY symptom_name;
   `;
   return symptoms;
 });

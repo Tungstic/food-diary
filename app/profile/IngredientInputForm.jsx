@@ -6,6 +6,7 @@ import { useState } from 'react';
 export default function IngredientInputForm(props) {
   const [ingredientFromUser, setIngredientFromUser] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const [checkmark, setCheckmark] = useState();
   const currentUserId = props.user;
   const router = useRouter();
 
@@ -20,7 +21,7 @@ export default function IngredientInputForm(props) {
     const response = await fetch('/api/ingredients', {
       method: 'POST',
       body: JSON.stringify({
-        symptomName: ingredientFromUser,
+        ingredientName: ingredientFromUser,
         userId: currentUserId,
       }),
     });
@@ -32,6 +33,7 @@ export default function IngredientInputForm(props) {
     if (data) {
       router.refresh();
       setIngredientFromUser('');
+      setCheckmark('✔️');
     }
   }
 
@@ -48,6 +50,7 @@ export default function IngredientInputForm(props) {
       <button disabled={isDisabled} onClick={async () => await handleSubmit()}>
         Save
       </button>
+      <span>{checkmark}</span>
     </form>
   );
 }

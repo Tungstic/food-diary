@@ -49,7 +49,7 @@ export const getAllIngredients = cache(async () => {
     SELECT
       ingredients.ingredient_name
     FROM ingredients
-
+    ORDER BY ingredient_name;
   `;
   return allIngredients;
 });

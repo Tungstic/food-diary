@@ -1,11 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function SymptomInputForm(props) {
   const [symptomFromUser, setSymptomFromUser] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const [checkmark, setCheckmark] = useState();
   const currentUserId = props.user;
   const router = useRouter();
 
@@ -32,6 +33,7 @@ export default function SymptomInputForm(props) {
     if (data) {
       router.refresh();
       setSymptomFromUser('');
+      setCheckmark('✔️');
     }
   }
 
@@ -48,6 +50,7 @@ export default function SymptomInputForm(props) {
       <button disabled={isDisabled} onClick={async () => await handleSubmit()}>
         Save
       </button>
+      <span>{checkmark}</span>
     </form>
   );
 }
