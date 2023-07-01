@@ -38,13 +38,14 @@ export default async function ProfileUsernamePage() {
         ingredients and add to it. You can also create new symptoms and/or
         ingredients while making{' '}
         <Link style={{ textDecoration: 'none', color: 'red' }} href="/new">
-          a new entry
+          a new entry.
         </Link>
       </div>
       <div className={styles.readOnlyLists}>
+        <InputForm />
+        <InputForm />
         <div className={styles.symptoms}>
-          Symptoms
-          <InputForm />
+          symptom
           <ul>
             {symptomList.map((singleSymptom) => {
               return <li key={`symptom ${singleSymptom}`}>{singleSymptom}</li>;
@@ -52,7 +53,7 @@ export default async function ProfileUsernamePage() {
           </ul>
         </div>
         <div className={styles.symptoms}>
-          Ingredients
+          ingredient
           <ul>
             {ingredientList.map((singleIngredient) => {
               return (

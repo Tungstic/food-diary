@@ -12,7 +12,11 @@ export default function InputForm() {
   return (
     <label>
       Add new
-      <input value={valueFromUser} />
+      <input
+        style={{ marginLeft: '8px' }}
+        value={valueFromUser}
+        onChange={handleInput}
+      />
     </label>
   );
 }

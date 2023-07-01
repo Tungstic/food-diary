@@ -1,6 +1,4 @@
 .symptoms {
-  margin-left: 16px;
-
   & > ul {
     max-height: 400px;
     overflow-y: scroll;
@@ -10,11 +8,13 @@
 }
 
 .readOnlyLists {
+  margin-left: 24px;
   margin-top: 24px;
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-}
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content;
+  row-gap: 16px;
+  column-gap: 8px;
 
-.input {
+  justify-items: center;
 }
