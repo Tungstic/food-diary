@@ -1,12 +1,22 @@
 'use client';
 
 import './Calendar.css';
-import React, { useState } from 'react';
+import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
+import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 export default function MyCalendar() {
-  const timeOfMeal = new Date();
-  const [value, setValue] = useState(timeOfMeal.toISOString());
+  const [value, setValue] = useState(new Date());
+
+  useEffect(() => {
+    const onlyDate = dayjs(value).format();
+    console.log(onlyDate);
+  }, [value]);
 
   /* async function getEntriesByDate(dateOfEntry, userId) {
     const response = await fetch(`http://localhost:3000/api/entries?date=${dateOfEntry}`);
@@ -18,14 +28,5 @@ export default function MyCalendar() {
     }
   } */
 
-  return (
-    <Calendar
-      value={value}
-      onChange={(value) => {
-        setValue(value);
-        console.log(value);
-      }}
-      locale="en-GB"
-    />
-  );
+  return <Calendar value={value} onChange={setValue} locale="en-GB" />;
 }

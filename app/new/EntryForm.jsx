@@ -2,17 +2,11 @@
 
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
-import dayjs from 'dayjs';
-import timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import DatePicker from 'react-date-picker';
 import CreatableSelect from 'react-select/creatable';
 import styles from './EntryForm.module.scss';
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 export default function EntryForm(props) {
   // CreatableSelect: newOption is array of input objects (user's choice)
