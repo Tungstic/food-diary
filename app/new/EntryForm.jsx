@@ -25,14 +25,9 @@ export default function EntryForm(props) {
   const [newIngredient, setNewIngredient] = useState('');
   // string as a name, input's text value
   const [mealName, setMealName] = useState('');
-  // current local date (with time) for Date Picker
-  const [mealDate, setMealDate] = useState(new Date());
-  // Date Picker only rendered after page's mounted (to avoid hydration error)
-  const [hasMounted, setHasMounted] = useState(false);
+
   const [isDisabled, setIsDisabled] = useState(true);
   const router = useRouter();
-
-  useEffect(() => setHasMounted(true), []);
 
   // get an array of objects from DB symptoms/ingredients table (keys: id, symptomName, userId)
   const symptomsFromDB = props.symptoms;
@@ -104,14 +99,12 @@ export default function EntryForm(props) {
     }
   }
   async function saveNewEntry() {
-    const isoDate = mealDate.toISOString();
-
     const response = await fetch('/api/entries', {
       method: 'POST',
       body: JSON.stringify({
         mealName: mealName,
         userId: currentUserId,
-        dateOfMeal: isoDate,
+
         note: 'bla',
         // sent the user's choice
         // use ids of symptoms/i instead of names??
@@ -122,8 +115,6 @@ export default function EntryForm(props) {
 
     const data = await response.json();
     console.log('new entry', data);
-    const testTime = dayjs.tz(data.dateOfMeal, 'Europe/Vienna');
-    console.log(testTime.format());
 
     if (data) {
       router.push('/');
@@ -170,14 +161,7 @@ export default function EntryForm(props) {
           placeholder="Feeling heavy after food"
         />
       </label>
-      {hasMounted === true && (
-        <DatePicker
-          aria-label="pick the entry's date"
-          locale="en-US"
-          onChange={setMealDate}
-          value={mealDate}
-        />
-      )}
+
       {newSymptom !== '' && (
         <button onClick={saveNewSymptom}>Save new symptom</button>
       )}

@@ -62,12 +62,7 @@ export async function POST(
   console.log('my body from api', body);
 
   // check the values with zod (aren't allowed to be undefined or different data types)
-  const newEntry = await createEntry(
-    body.mealName,
-    session.userId,
-    body.dateOfMeal,
-    body.note,
-  );
+  const newEntry = await createEntry(body.mealName, session.userId, body.note);
 
   console.log('my new entry', newEntry);
 
