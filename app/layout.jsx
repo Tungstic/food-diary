@@ -33,7 +33,10 @@ export default async function RootLayout({ children }) {
                   <Link href="/profile">My profile</Link>
                 </div>
                 <div className="auth">
-                  <div>{user.username}</div>
+                  <div>
+                    {user.username.at(0)?.toUpperCase() +
+                      user.username.slice(1)}
+                  </div>
                   <LogoutButton logout={logout} />
                 </div>
               </>
