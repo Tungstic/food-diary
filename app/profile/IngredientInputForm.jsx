@@ -3,45 +3,45 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-export default function SymptomInputForm(props) {
-  const [symptomFromUser, setSymptomFromUser] = useState('');
+export default function IngredientInputForm(props) {
+  const [ingredientFromUser, setIngredientFromUser] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const currentUserId = props.user;
   const router = useRouter();
 
   function handleInput(event) {
-    setSymptomFromUser(event.currentTarget.value);
-    if (symptomFromUser !== '') {
+    setIngredientFromUser(event.currentTarget.value);
+    if (ingredientFromUser !== '') {
       setIsDisabled(false);
     }
   }
 
   async function handleSubmit() {
-    const response = await fetch('/api/symptoms', {
+    const response = await fetch('/api/ingredients', {
       method: 'POST',
       body: JSON.stringify({
-        symptomName: symptomFromUser,
+        symptomName: ingredientFromUser,
         userId: currentUserId,
       }),
     });
 
     const data = await response.json();
 
-    console.log('new symptom from user', data);
+    console.log('new ingredient from user', data);
 
     if (data) {
       router.refresh();
-      setSymptomFromUser('');
+      setIngredientFromUser('');
     }
   }
 
   return (
     <form onSubmit={(event) => event.preventDefault()}>
       <label>
-        Add new symptom
+        Add new ingredient
         <input
           style={{ marginLeft: '8px' }}
-          value={symptomFromUser}
+          value={ingredientFromUser}
           onChange={handleInput}
         />
       </label>
