@@ -22,7 +22,7 @@ export default async function StatisticsPage() {
     <>
       <div>id: {user.id}</div>
       <div>username: {user.username}</div>
-      <div>here are the symptoms I created</div>
+      <div>Here are the symptoms I have experienced</div>
       {listOfSymptoms.map((symptom) => {
         return <div key={`key-${symptom}`}>{symptom.symptomName}</div>;
       })}

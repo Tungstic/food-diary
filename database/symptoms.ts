@@ -62,3 +62,14 @@ export const getSymptomByEntryId = cache(async (entryId: number) => {
     `;
   return symptoms;
 });
+
+export const getLoggedSymptomIdByUser = cache(async (userId: number) => {
+  const symptoms = await sql<Symptom[]>`
+    SELECT symptom_id
+    FROM entries_and_symptoms
+    INNER JOIN entries ON
+    entries.id = entries_and_symptoms.entry_id
+    WHERE entries.user_id = ${userId}
+  `;
+  return symptoms;
+});
