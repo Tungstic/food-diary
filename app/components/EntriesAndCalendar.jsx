@@ -75,7 +75,12 @@ export default function EntriesAndCalendar() {
             })}
           </ul>
         </div>
-        <Calendar value={value} onChange={setValue} locale="en-GB" />
+        <Calendar
+          maxDate={new Date()}
+          value={value}
+          onChange={setValue}
+          locale="en-GB"
+        />
       </div>
     );
   }
