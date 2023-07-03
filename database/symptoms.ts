@@ -1,3 +1,4 @@
+import { on } from 'events';
 import { cache } from 'react';
 import { Symptom } from '../migrations/1687171306-createSymptomsTable';
 import { sql } from './connect';
@@ -73,3 +74,11 @@ export const getLoggedSymptomIdByUser = cache(async (userId: number) => {
   `;
   return symptoms;
 });
+
+// use this query to get such result
+// symptom_name   symptom_count
+// bloating       1
+// cramps         1
+// nausea         4
+
+/* SELECT symptom_name, COUNT(symptom_name) AS symptom_count FROM symptoms INNER JOIN entries_and_symptoms ON symptoms.id=entries_and_symptoms.symptom_id INNER JOIN entries ON entries.id=entries_and_symptoms.entry_id WHERE entries.user_id=4 GROUP BY symptom_name  */
