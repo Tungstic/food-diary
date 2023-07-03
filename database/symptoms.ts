@@ -51,3 +51,14 @@ export const getAllSymptoms = cache(async () => {
   `;
   return symptoms;
 });
+
+export const getSymptomByEntryId = cache(async (entryId: number) => {
+  const symptoms = await sql<Symptom[]>`
+    SELECT symptom_name
+    FROM symptoms
+    INNER JOIN entries_and_symptoms ON
+    symptoms.id = entries_and_symptoms.symptom_id
+    WHERE entry_id = ${entryId}
+    `;
+  return symptoms;
+});

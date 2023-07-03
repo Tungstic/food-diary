@@ -11,7 +11,10 @@ import {
   getIngredientByIngredientName,
 } from '../../../database/ingredients';
 import { getValidSessionByToken } from '../../../database/sessions';
-import { getSymptomBySymptomName } from '../../../database/symptoms';
+import {
+  getSymptomByEntryId,
+  getSymptomBySymptomName,
+} from '../../../database/symptoms';
 
 type Entry = {
   mealName: string;
@@ -151,12 +154,19 @@ export async function GET(
 
   for (const entry of entries) {
     const ingredientName = await getIngredientByEntryId(entry.id);
+    const symptomName = await getSymptomByEntryId(entry.id);
 
     // array of objects key: ingredientName, value: string (name)
     const onlyIngredientNames = ingredientName.map((obj) => obj.ingredientName);
 
-    expandedEntry = { ...entry, onlyIngredientNames };
-    expandedEntryArray.push(expandedEntry);
+    if (symptomName.length > 0) {
+      const onlySymptomNames = symptomName.map((obj) => obj.symptomName);
+      expandedEntry = { ...entry, onlyIngredientNames, onlySymptomNames };
+      expandedEntryArray.push(expandedEntry);
+    } else {
+      expandedEntry = { ...entry, onlyIngredientNames };
+      expandedEntryArray.push(expandedEntry);
+    }
   }
 
   console.log('todaysEntries mutated?', expandedEntryArray);

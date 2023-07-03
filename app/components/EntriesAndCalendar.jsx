@@ -54,13 +54,22 @@ export default function EntriesAndCalendar() {
                   key={`meal number ${entry.id}`}
                 >
                   <div>{`Meal: ${entry.mealName}`}</div>
-                  <div>{`Note: ${entry.note}`}</div>
+
                   <div className={styles.listOfIngredients}>
                     Ingredients:
                     {entry.onlyIngredientNames.map((i) => {
                       return <div key={`ingredient ${i}`}>{i}</div>;
                     })}
                   </div>
+                  {Object.keys(entry).includes('onlySymptomNames') && (
+                    <div className={styles.listOfIngredients}>
+                      Symptoms:
+                      {entry.onlySymptomNames.map((i) => {
+                        return <div key={`symptom ${i}`}>{i}</div>;
+                      })}
+                    </div>
+                  )}
+                  <div>{`Note: ${entry.note}`}</div>
                 </li>
               );
             })}
