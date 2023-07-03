@@ -23,4 +23,8 @@
 
 .note {
   margin-left: 8px;
+  overflow: auto;
+}
+.noteWrapper {
+  display: flex;
 }

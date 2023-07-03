@@ -53,8 +53,8 @@ export default function EntriesAndCalendar() {
                   className={styles.singleEntry}
                   key={`meal number ${entry.id}`}
                 >
-                  <div>{`Meal ${entry.mealName}`}</div>
-                  <div>Note:{entry.note}</div>
+                  <div>{`Meal: ${entry.mealName}`}</div>
+                  <div>{`Note: ${entry.note}`}</div>
                   <div className={styles.listOfIngredients}>
                     Ingredients:
                     {entry.onlyIngredientNames.map((i) => {

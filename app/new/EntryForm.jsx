@@ -3,8 +3,7 @@
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import DatePicker from 'react-date-picker';
+import { useState } from 'react';
 import CreatableSelect from 'react-select/creatable';
 import styles from './EntryForm.module.scss';
 
@@ -19,6 +18,7 @@ export default function EntryForm(props) {
   const [newIngredient, setNewIngredient] = useState('');
   // string as a name, input's text value
   const [mealName, setMealName] = useState('');
+  const [note, setNote] = useState('');
 
   const [isDisabled, setIsDisabled] = useState(true);
   const router = useRouter();
@@ -99,7 +99,7 @@ export default function EntryForm(props) {
         mealName: mealName,
         userId: currentUserId,
 
-        note: 'bla',
+        note: note,
         // sent the user's choice
         // use ids of symptoms/i instead of names??
         symptoms: symptomChoice,
@@ -146,15 +146,19 @@ export default function EntryForm(props) {
           onChange={handleSymptomChoice}
         />
       </div>
-      <label htmlFor="note">
-        Note
-        <textarea
-          className={styles.note}
-          name="note"
-          maxLength={150}
-          placeholder="Feeling heavy after food"
-        />
-      </label>
+      <div className={styles.noteWrapper}>
+        <label htmlFor="note">
+          Note</label>
+          <textarea
+            className={styles.note}
+            name="note"
+            maxLength={150}
+            placeholder="Feeling heavy after food"
+            value={note}
+            onChange={(event) => setNote(event.currentTarget.value)}
+          />
+
+      </div>
 
       {newSymptom !== '' && (
         <button onClick={saveNewSymptom}>Save new symptom</button>
