@@ -53,3 +53,22 @@ export const getAllIngredients = cache(async () => {
   `;
   return allIngredients;
 });
+
+export const getIngredientsByRelatedSymptom = cache(
+  async (userId: number, symptomId: number) => {
+    const ingredients = await sql<Ingredient[]>`
+    SELECT ingredient_name, COUNT(ingredient_name) AS ingredient_count
+    FROM ingredients
+    INNER JOIN entries_and_ingredients ON
+    ingredients.id=entries_and_ingredients.ingredient_id
+    INNER JOIN entries ON
+    entries.id=entries_and_ingredients.entry_id
+    INNER JOIN entries_and_symptoms ON
+    entries.id=entries_and_symptoms.entry_id AND
+    entries_and_symptoms.symptom_id=${symptomId}
+    WHERE entries.user_id=${userId}
+    GROUP BY ingredient_name ORDER BY ingredient_count DESC;
+  `;
+    return ingredients;
+  },
+);

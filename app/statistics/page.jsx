@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import {
   getSymptomsByUserId,
+  getSymptomsWithCount,
   getSymptomTable,
   getSymptomWithCount,
 } from '../../database/symptoms';
@@ -20,7 +21,7 @@ export default async function StatisticsPage() {
     redirect('/login');
   }
 
-  const listOfSymptoms = await getSymptomWithCount(user.id);
+  const listOfSymptoms = await getSymptomsWithCount(user.id);
 
   return (
     <>
