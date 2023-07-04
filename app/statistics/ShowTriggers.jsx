@@ -28,7 +28,7 @@ export default function ShowTriggers(props) {
       {listOfIngredients.map((ingredient) => {
         return (
           <div key={`ingredient ${ingredient.ingredientName}`}>
-            {ingredient.ingredientName}
+            {`${ingredient.ingredientName} - ${ingredient.ingredientCount}`}
           </div>
         );
       })}
