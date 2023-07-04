@@ -1,12 +1,8 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import {
-  getSymptomsByUserId,
-  getSymptomsWithCount,
-  getSymptomTable,
-  getSymptomWithCount,
-} from '../../database/symptoms';
+import { getSymptomsWithCount } from '../../database/symptoms';
 import { getUserBySessionToken } from '../../database/users';
+import ShowTriggers from './ShowTriggers';
 
 export default async function StatisticsPage() {
   // 1. get the session token from the cookie
@@ -28,9 +24,10 @@ export default async function StatisticsPage() {
       <div>Here are the symptoms I have experienced</div>
       {listOfSymptoms.map((symptom) => {
         return (
-          <div
-            key={`key-${symptom}`}
-          >{`${symptom.symptomName}- ${symptom.symptomCount} times`}</div>
+          <div key={`key-${symptom.symptomName}`}>
+            {`${symptom.symptomName}- ${symptom.symptomCount} times`}
+            <ShowTriggers symptom={symptom.symptomName} />
+          </div>
         );
       })}
     </>
