@@ -8,20 +8,20 @@ type Error = {
   error: string;
 };
 
-type Ingredient = {
+type IngredientCounted = {
   ingredientName: string;
   ingredientCount: number;
 };
 
 type SymptomTriggersResponseBodyGet =
   | {
-      ingredient: Ingredient[];
+      ingredients: IngredientCounted[];
     }
   | Error;
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Record<string> },
+  { params }: { params: { symptomName: string } },
 ): Promise<NextResponse<SymptomTriggersResponseBodyGet>> {
   const symptomName = params.symptomName;
 

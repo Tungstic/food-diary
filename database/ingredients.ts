@@ -2,6 +2,11 @@ import { cache } from 'react';
 import { Ingredient } from '../migrations/1687182216-createIngredientsTable';
 import { sql } from './connect';
 
+type IngredientCounted = {
+  ingredientName: string;
+  ingredientCount: number;
+};
+
 export const createIngredient = cache(
   async (ingredientName: string, userId: number) => {
     const [ingredient] = await sql<Ingredient[]>`
@@ -56,7 +61,7 @@ export const getAllIngredients = cache(async () => {
 
 export const getIngredientsByRelatedSymptom = cache(
   async (userId: number, symptomId: number) => {
-    const ingredients = await sql<Ingredient[]>`
+    const ingredients = await sql<IngredientCounted[]>`
     SELECT ingredient_name, COUNT(ingredient_name) AS ingredient_count
     FROM ingredients
     INNER JOIN entries_and_ingredients ON

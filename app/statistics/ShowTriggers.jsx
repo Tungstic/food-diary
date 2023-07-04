@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // button -> show triggers on click
 export default function ShowTriggers(props) {
