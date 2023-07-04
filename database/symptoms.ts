@@ -1,4 +1,3 @@
-import { on } from 'events';
 import { cache } from 'react';
 import { Symptom } from '../migrations/1687171306-createSymptomsTable';
 import { sql } from './connect';
@@ -81,4 +80,10 @@ export const getLoggedSymptomIdByUser = cache(async (userId: number) => {
 // cramps         1
 // nausea         4
 
+export const getSymptomWithCount = cache(async (userId: number) => {
+  const symptoms = await sql<Symptom[]>`
+    SELECT symptom_name, COUNT(symptom_name) AS symptom_count FROM symptoms INNER JOIN entries_and_symptoms ON symptoms.id=entries_and_symptoms.symptom_id INNER JOIN entries ON entries.id=entries_and_symptoms.entry_id WHERE entries.user_id=${userId} GROUP BY symptom_name ORDER BY symptom_count DESC;
+  `;
+  return symptoms;
+});
 /* SELECT symptom_name, COUNT(symptom_name) AS symptom_count FROM symptoms INNER JOIN entries_and_symptoms ON symptoms.id=entries_and_symptoms.symptom_id INNER JOIN entries ON entries.id=entries_and_symptoms.entry_id WHERE entries.user_id=4 GROUP BY symptom_name  */

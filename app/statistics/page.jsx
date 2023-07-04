@@ -1,6 +1,10 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { getSymptomsByUserId } from '../../database/symptoms';
+import {
+  getSymptomsByUserId,
+  getSymptomTable,
+  getSymptomWithCount,
+} from '../../database/symptoms';
 import { getUserBySessionToken } from '../../database/users';
 
 export default async function StatisticsPage() {
@@ -16,15 +20,17 @@ export default async function StatisticsPage() {
     redirect('/login');
   }
 
-  const listOfSymptoms = await getSymptomsByUserId(user.id);
+  const listOfSymptoms = await getSymptomWithCount(user.id);
 
   return (
     <>
-      <div>id: {user.id}</div>
-      <div>username: {user.username}</div>
       <div>Here are the symptoms I have experienced</div>
       {listOfSymptoms.map((symptom) => {
-        return <div key={`key-${symptom}`}>{symptom.symptomName}</div>;
+        return (
+          <div
+            key={`key-${symptom}`}
+          >{`${symptom.symptomName}- ${symptom.symptomCount} times`}</div>
+        );
       })}
     </>
   );
