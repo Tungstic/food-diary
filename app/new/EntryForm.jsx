@@ -147,33 +147,41 @@ export default function EntryForm(props) {
         />
       </div>
       <div className={styles.noteWrapper}>
-        <label htmlFor="note">
-          Note</label>
-          <textarea
-            className={styles.note}
-            name="note"
-            maxLength={150}
-            placeholder="Feeling heavy after food"
-            value={note}
-            onChange={(event) => setNote(event.currentTarget.value)}
-          />
-
+        <label htmlFor="note">Note</label>
+        <textarea
+          className={styles.note}
+          name="note"
+          maxLength={150}
+          placeholder="Feeling heavy after food"
+          value={note}
+          onChange={(event) => setNote(event.currentTarget.value)}
+        />
       </div>
 
       {newSymptom !== '' && (
-        <button onClick={saveNewSymptom}>Save new symptom</button>
+        <button className={styles.button} onClick={saveNewSymptom}>
+          Save new symptom
+        </button>
       )}
       {newIngredient !== '' && (
-        <button onClick={saveNewIngredient}>Save new ingredient</button>
+        <button className={styles.button} onClick={saveNewIngredient}>
+          Save new ingredient
+        </button>
       )}
       {/*   disable that button until new symptoms/i are saved to DB */}
       {mealName !== '' &&
       ingredientChoice.length > 0 &&
       newIngredient === '' &&
       newSymptom === '' ? (
-        <button onClick={saveNewEntry}>Save the entry</button>
+        <button className={styles.button} onClick={saveNewEntry}>
+          Save the entry
+        </button>
       ) : (
-        <button disabled={isDisabled} onClick={saveNewEntry}>
+        <button
+          className={styles.button}
+          disabled={isDisabled}
+          onClick={saveNewEntry}
+        >
           Save the entry
         </button>
       )}

@@ -30,7 +30,7 @@ export default async function ProfileUsernamePage() {
   );
 
   return (
-    <>
+    <div style={{ minHeight: '100vh' }}>
       <div className={styles.hello}>{`Hello, ${user.username
         .at(0)
         ?.toUpperCase()}${user.username.slice(1)}!`}</div>
@@ -66,6 +66,6 @@ export default async function ProfileUsernamePage() {
           </ul>
         </div>
       </div>
-    </>
+    </div>
   );
 }

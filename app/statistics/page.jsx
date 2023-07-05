@@ -20,7 +20,7 @@ export default async function StatisticsPage() {
   const listOfSymptoms = await getSymptomsWithCount(user.id);
 
   return (
-    <>
+    <div style={{ minHeight: '100vh' }}>
       <div>Here are the symptoms I have experienced</div>
       {listOfSymptoms.map((symptom) => {
         return (
@@ -30,6 +30,6 @@ export default async function StatisticsPage() {
           </div>
         );
       })}
-    </>
+    </div>
   );
 }

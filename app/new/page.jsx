@@ -22,11 +22,13 @@ export default async function NewEntryPage() {
   const ingredients = await getAllIngredients();
 
   return (
-    <>
-      <div style={{ marginLeft: '16px' }}>{`Welcome back, ${user.username
+    <div style={{ minHeight: '100vh' }}>
+      <div
+        style={{ marginLeft: '16px', marginTop: '16px' }}
+      >{`Welcome back, ${user.username
         .at(0)
         ?.toUpperCase()}${user.username.slice(1)}`}</div>
       <EntryForm symptoms={symptoms} user={user.id} ingredients={ingredients} />
-    </>
+    </div>
   );
 }
