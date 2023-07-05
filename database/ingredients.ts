@@ -72,7 +72,7 @@ export const getIngredientsByRelatedSymptom = cache(
     entries.id=entries_and_symptoms.entry_id AND
     entries_and_symptoms.symptom_id=${symptomId}
     WHERE entries.user_id=${userId}
-    GROUP BY ingredient_name ORDER BY ingredient_count DESC;
+    GROUP BY ingredient_name ORDER BY ingredient_count DESC LIMIT 10;
   `;
     return ingredients;
   },
