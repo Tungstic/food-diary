@@ -30,7 +30,7 @@ export default function ShowTriggers(props) {
         {
           label: 'food triggers',
           data: data.ingredients.map((i) => i.ingredientCount),
-          backgroundColor: ['#2a71d0'],
+          backgroundColor: ['#d7c7fe'],
           borderColor: 'black',
           borderWidth: 2,
         },
