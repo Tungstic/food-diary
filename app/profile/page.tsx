@@ -35,9 +35,8 @@ export default async function ProfileUsernamePage() {
         .at(0)
         ?.toUpperCase()}${user.username.slice(1)}!`}</div>
       <div className={styles.hello}>
-        This is your profile. Here you can see the full list of symptoms and
-        ingredients and add to it. You can also create new symptoms and/or
-        ingredients while making a{' '}
+        Here you can see the full list of symptoms and ingredients and add to
+        it. You can also create new symptoms and/or ingredients while making a{' '}
         <Link
           style={{ textDecoration: 'underline', textUnderlineOffset: '4px' }}
           href="/new"

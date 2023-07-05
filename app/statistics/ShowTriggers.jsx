@@ -1,11 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { CategoryScale } from 'chart.js';
+import Chart from 'chart.js/auto';
+import { useEffect, useState } from 'react';
+import BarChart from '../components/BarChart';
+
+Chart.register(CategoryScale);
 
 // button -> show triggers on click
 export default function ShowTriggers(props) {
-  const [listOfIngredients, setListOfIngredients] = useState([]);
   const symptom = props.symptom;
+
+  const [chartData, setChartData] = useState({});
+  const [hidden, setHidden] = useState(true);
 
   async function handleClick() {
     const response = await fetch(
@@ -17,21 +24,35 @@ export default function ShowTriggers(props) {
     console.log('data', data.ingredients);
     // Object: {ingredients: [{ingredientName, ingredientCount}]}
 
-    setListOfIngredients(data.ingredients);
-    console.log('list', listOfIngredients);
+    setChartData({
+      labels: data.ingredients.map((i) => i.ingredientName),
+      datasets: [
+        {
+          label: 'food triggers',
+          data: data.ingredients.map((i) => i.ingredientCount),
+          backgroundColor: ['#2a71d0'],
+          borderColor: 'black',
+          borderWidth: 2,
+        },
+      ],
+    });
+    setHidden(false);
   }
 
   return (
     <div>
-      <button onClick={handleClick}>Show possible food triggers</button>
+      <button
+        onClick={async () => {
+          await handleClick();
+          setHidden(!hidden);
+        }}
+      >
+        {hidden ? 'show possible food triggers' : 'close chart'}
+      </button>
 
-      {listOfIngredients.map((ingredient) => {
-        return (
-          <div key={`ingredient ${ingredient.ingredientName}`}>
-            {`${ingredient.ingredientName} - ${ingredient.ingredientCount}`}
-          </div>
-        );
-      })}
+      {Object.keys(chartData).includes('labels') && !hidden && (
+        <BarChart chartData={chartData} />
+      )}
     </div>
   );
 }
