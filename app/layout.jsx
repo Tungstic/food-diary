@@ -54,14 +54,14 @@ export default async function RootLayout({ children }) {
           </nav>
         </header>
         {children}
-        {/* <footer>
+        <footer>
           <div>Made by NB ©2023</div>
           <div>
             Disclaimer: this app does not provide any medical or dietary advice.
             Always consult a licensed health professional prior to modifying
             your diet.
           </div>
-        </footer> */}
+        </footer>
       </body>
     </html>
   );
