@@ -2,7 +2,7 @@
 
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import BarChart from '../components/BarChart';
 
 Chart.register(CategoryScale);
@@ -42,6 +42,7 @@ export default function ShowTriggers(props) {
   return (
     <div>
       <button
+        style={{ padding: '4px' }}
         onClick={async () => {
           await handleClick();
           setHidden(!hidden);
