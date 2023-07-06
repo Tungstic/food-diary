@@ -23,14 +23,6 @@ type Entry = {
   note: string | undefined;
 };
 
-type EntryFromDB = {
-  id: number;
-  mealName: string;
-  userId: number;
-  dateOfMeal: Date;
-  note: string | undefined;
-};
-
 type Error = {
   error: string;
 };
@@ -99,10 +91,7 @@ export async function POST(
     const ingredientId = await getIngredientByIngredientName(ingredient);
 
     if (ingredientId) {
-      const newEntryWithIngredient = await createEntryWithIngredient(
-        ingredientId.id,
-        newEntry.id,
-      );
+      await createEntryWithIngredient(ingredientId.id, newEntry.id);
     }
   }
 
