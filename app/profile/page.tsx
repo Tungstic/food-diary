@@ -55,7 +55,6 @@ export default async function ProfileUsernamePage() {
           </ul>
         </div>
         <div className={styles.symptoms}>
-          ingredient
           <ul>
             {ingredientList.map((singleIngredient) => {
               return (
