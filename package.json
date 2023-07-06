@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate": "dotenv -- ley --require tsm"
+    "migrate": "ley --require tsm"
   },
   "dependencies": {
     "@types/node": "20.3.1",
