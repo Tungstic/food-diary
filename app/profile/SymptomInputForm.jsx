@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function SymptomInputForm(props) {
   const [symptomFromUser, setSymptomFromUser] = useState('');

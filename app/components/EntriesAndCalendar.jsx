@@ -16,9 +16,7 @@ export default function EntriesAndCalendar() {
     const onlyDate = requiredDate.slice(0, 10);
     console.log(onlyDate);
     async function getEntriesByDate() {
-      const response = await fetch(
-        `http://localhost:3000/api/entries?date=${onlyDate}`,
-      );
+      const response = await fetch(`/api/entries?date=${onlyDate}`);
       const data = await response.json();
       console.log(data);
       setListOfEntries(data.entries);

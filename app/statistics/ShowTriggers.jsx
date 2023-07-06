@@ -15,9 +15,7 @@ export default function ShowTriggers(props) {
   const [hidden, setHidden] = useState(true);
 
   async function handleClick() {
-    const response = await fetch(
-      `http://localhost:3000/api/symptoms/${symptom}`,
-    );
+    const response = await fetch(`/api/symptoms/${symptom}`);
 
     const data = await response.json();
 
@@ -28,7 +26,7 @@ export default function ShowTriggers(props) {
       labels: data.ingredients.map((i) => i.ingredientName),
       datasets: [
         {
-          label: 'food triggers',
+          label: 'logged',
           data: data.ingredients.map((i) => i.ingredientCount),
           backgroundColor: ['#d7c7fe'],
           borderColor: 'black',
