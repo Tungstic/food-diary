@@ -14,10 +14,10 @@ export default async function HomePage() {
 
   if (!user) {
     return (
-      <>
+      <div className={styles.content}>
         <div>Welcome!</div>
         <div>info about the app</div>
-      </>
+      </div>
     );
   }
 

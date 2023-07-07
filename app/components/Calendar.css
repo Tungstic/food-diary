@@ -7,7 +7,7 @@
   line-height: 1.125em;
   float: right;
   margin-right: 32px;
-  box-shadow: 12px 12px 2px 1px #c7d2fe;
+  box-shadow: 12px 12px 2px 1px #5243ac;
   max-height: 350px;
 }
 
@@ -124,22 +124,22 @@
 }
 
 .react-calendar__tile--hasActive {
-  background: #76baff;
+  background: #5243ac;
 }
 
 .react-calendar__tile--hasActive:enabled:hover,
 .react-calendar__tile--hasActive:enabled:focus {
-  background: #a9d4ff;
+  background: #5243ac;
 }
 
 .react-calendar__tile--active {
-  background: #c7d2fe;
-  color: black;
+  background: #5243ac;
+  color: white;
 }
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background: #c7d2fe;
+  background: #5243ac;
 }
 
 .react-calendar--selectRange .react-calendar__tile--hover {

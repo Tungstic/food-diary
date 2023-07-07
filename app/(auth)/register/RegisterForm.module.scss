@@ -1,10 +1,10 @@
 .card {
   display: flex;
   flex-direction: column;
-  background-color: #c7d2fe;
   margin: 18px;
   padding: 32px;
   gap: 8px;
+  min-height: 100vh;
 
   & > * {
     & > * {
