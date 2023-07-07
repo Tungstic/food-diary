@@ -28,7 +28,7 @@ export default function ShowTriggers(props) {
         {
           label: 'logged',
           data: data.ingredients.map((i) => i.ingredientCount),
-          backgroundColor: ['#d7c7fe'],
+          backgroundColor: ['rgba(107, 63, 160, 0.5)'],
           borderColor: 'black',
           borderWidth: 2,
         },
