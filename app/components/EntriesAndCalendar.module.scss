@@ -11,5 +11,15 @@
 
 .singleEntry {
   margin: 16px;
-  background-color: aquamarine;
+  border: 2px solid #5243ac;
+  padding: 8px;
+  min-width: 25rem;
+  border-radius: 1.5%;
+  background-color: rgba(82, 67, 172, 0.9);
+  color: white;
+  box-shadow: 8px 8px 5px #c6c6c6;
+
+  & > * {
+    padding: 4px;
+  }
 }

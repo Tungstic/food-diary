@@ -30,7 +30,7 @@ export default function ShowTriggers(props) {
           data: data.ingredients.map((i) => i.ingredientCount),
           backgroundColor: ['rgba(107, 63, 160, 0.5)'],
           borderColor: 'black',
-          borderWidth: 2,
+          borderWidth: 1,
         },
       ],
     });

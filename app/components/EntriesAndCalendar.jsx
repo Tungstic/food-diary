@@ -41,10 +41,10 @@ export default function EntriesAndCalendar() {
     return (
       <div className={styles.withEntries}>
         <div>
-          <div style={{ margin: '16px' }}>{`The meals you logged on ${value
-            .toString()
-            .slice(0, 10)}`}</div>
-          <ul>
+          <div
+            style={{ margin: '16px', fontSize: '1.3rem' }}
+          >{`Meals you logged on ${value.toString().slice(0, 10)}`}</div>
+          <ul style={{ listStyle: 'none' }}>
             {listOfEntries.map((entry) => {
               return (
                 <li
@@ -67,7 +67,7 @@ export default function EntriesAndCalendar() {
                       })}
                     </div>
                   )}
-                  <div>{`Note: ${entry.note}`}</div>
+                  <div>{`Note: ${entry.note !== '' ? entry.note : '--'}`}</div>
                 </li>
               );
             })}
