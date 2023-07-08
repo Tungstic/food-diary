@@ -47,7 +47,11 @@ export default function SymptomInputForm(props) {
           onChange={handleInput}
         />
       </label>
-      <button disabled={isDisabled} onClick={async () => await handleSubmit()}>
+      <button
+        style={{ padding: '0' }}
+        disabled={isDisabled}
+        onClick={async () => await handleSubmit()}
+      >
         Save
       </button>
       <span>{checkmark}</span>

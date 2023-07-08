@@ -4,6 +4,12 @@
     overflow-y: scroll;
     margin-top: 16px;
     min-width: 300px;
+    border: 1px solid #5243ac;
+    background-color: rgba(82, 67, 172, 0.9);
+    color: white;
+    border-radius: 2%;
+    padding: 8px;
+    box-shadow: 8px 8px 5px #c6c6c6;
   }
 }
 
@@ -23,4 +29,10 @@
   margin-left: 24px;
   margin-right: 24px;
   padding: 8px;
+
+  & > a {
+    color: black;
+    text-decoration-line: underline;
+    text-underline-offset: 4px;
+  }
 }

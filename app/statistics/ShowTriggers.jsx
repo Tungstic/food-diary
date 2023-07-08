@@ -40,7 +40,6 @@ export default function ShowTriggers(props) {
   return (
     <div>
       <button
-        style={{ padding: '4px' }}
         onClick={async () => {
           await handleClick();
           setHidden(!hidden);

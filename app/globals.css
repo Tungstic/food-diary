@@ -55,3 +55,7 @@ footer {
   justify-content: flex-end;
   gap: 24px;
 }
+
+button {
+  padding: 8px;
+}
