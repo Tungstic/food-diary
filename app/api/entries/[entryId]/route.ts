@@ -1,7 +1,9 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { getEntryById } from '../../../../database/entries';
+import { getIngredientByEntryId } from '../../../../database/ingredients';
 import { getValidSessionByToken } from '../../../../database/sessions';
+import { getSymptomByEntryId } from '../../../../database/symptoms';
 import { Entry } from '../../../../migrations/1687438065-createEntriesTable';
 
 type Error = {
@@ -43,5 +45,18 @@ export async function GET(
     return NextResponse.json({ error: 'Entry not found' }, { status: 404 });
   }
 
-  return NextResponse.json({ entry: entry });
+  let expandedEntry;
+
+  const ingredientName = await getIngredientByEntryId(entry.id);
+  const symptomName = await getSymptomByEntryId(entry.id);
+  const onlyIngredientNames = ingredientName.map((obj) => obj.ingredientName);
+
+  if (symptomName.length > 0) {
+    const onlySymptomNames = symptomName.map((obj) => obj.symptomName);
+    expandedEntry = { ...entry, onlyIngredientNames, onlySymptomNames };
+  } else {
+    expandedEntry = { ...entry, onlyIngredientNames };
+  }
+
+  return NextResponse.json({ entry: expandedEntry });
 }
