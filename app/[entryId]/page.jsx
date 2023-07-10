@@ -3,7 +3,6 @@ import { getUserBySessionToken } from '../../database/users';
 import ShowEntry from './ShowEntry';
 
 export default async function SingleEntry(props) {
-
   const entryId = props.params.entryId;
 
   const cookieStore = cookies();
@@ -17,5 +16,5 @@ export default async function SingleEntry(props) {
     return <div>Please log in</div>;
   }
 
-  return <ShowEntry entryId={entryId}/>;
+  return <ShowEntry entryId={entryId} />;
 }

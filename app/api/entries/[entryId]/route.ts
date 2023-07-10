@@ -15,6 +15,7 @@ export async function GET(
   { params }: { params: { entryId: string } },
 ): Promise<NextResponse<EntryResponseBodyGet>> {
   const entryId = Number(params.entryId);
+  console.log('entry number', entryId);
 
   if (!entryId) {
     return NextResponse.json(

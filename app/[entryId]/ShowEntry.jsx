@@ -1,18 +1,16 @@
 'use client';
 
-import { useEffect } from 'react';
-
 export default function ShowEntry({ entryId }) {
-  useEffect(() => {
-    async function getEntryById() {
-      const response = await fetch(`/api/entries/`);
-      const data = await response.json();
+  // entryId is a string
 
-      console.log('my single entry', data);
+  async function getEntryById() {
+    const response = await fetch(`/api/entries/${entryId}`);
+    const data = await response.json();
 
-      getEntryById().catch((error) => console.log(error));
-    }
-  }, []);
+    console.log('my single entry', data);
 
-  return <div>{JSON.stringify(entryId)}</div>;
+    getEntryById().catch((error) => console.log(error));
+  }
+
+  return <div>hello</div>;
 }
