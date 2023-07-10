@@ -2,6 +2,7 @@
 
 import './Calendar.css';
 import dayjs from 'dayjs';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import styles from './EntriesAndCalendar.module.scss';
@@ -47,28 +48,29 @@ export default function EntriesAndCalendar() {
           <ul style={{ listStyle: 'none' }}>
             {listOfEntries.map((entry) => {
               return (
-                <li
-                  className={styles.singleEntry}
-                  key={`meal number ${entry.id}`}
-                >
-                  <div>{`Meal: ${entry.mealName}`}</div>
+                <Link href={`/${entry.id}`} key={`meal number ${entry.id}`}>
+                  <li className={styles.singleEntry}>
+                    <div>{`Meal: ${entry.mealName}`}</div>
 
-                  <div className={styles.listOfIngredients}>
-                    Ingredients:
-                    {entry.onlyIngredientNames.map((i) => {
-                      return <div key={`ingredient ${i}`}>{i}</div>;
-                    })}
-                  </div>
-                  {Object.keys(entry).includes('onlySymptomNames') && (
                     <div className={styles.listOfIngredients}>
-                      Symptoms:
-                      {entry.onlySymptomNames.map((i) => {
-                        return <div key={`symptom ${i}`}>{i}</div>;
+                      Ingredients:
+                      {entry.onlyIngredientNames.map((i) => {
+                        return <div key={`ingredient ${i}`}>{i}</div>;
                       })}
                     </div>
-                  )}
-                  <div>{`Note: ${entry.note !== '' ? entry.note : '--'}`}</div>
-                </li>
+                    {Object.keys(entry).includes('onlySymptomNames') && (
+                      <div className={styles.listOfIngredients}>
+                        Symptoms:
+                        {entry.onlySymptomNames.map((i) => {
+                          return <div key={`symptom ${i}`}>{i}</div>;
+                        })}
+                      </div>
+                    )}
+                    <div>{`Note: ${
+                      entry.note !== '' ? entry.note : '--'
+                    }`}</div>
+                  </li>
+                </Link>
               );
             })}
           </ul>

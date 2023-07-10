@@ -12,20 +12,6 @@ type EntryWithIngredient = {
   entryId: number;
 };
 
-/* export const getSymptomBySymptomName = cache(async (symptomName: string) => {
-  const [symptom] = await sql<Symptom[]>`
-    SELECT
-      id,
-      symptom_name
-    FROM
-      symptoms
-    WHERE
-      symptoms.symptom_name = ${symptomName.toLowerCase()}
- `;
-
-  return symptom;
-}); */
-
 export const createEntry = cache(
   async (mealName: string, userId: number, note: string) => {
     const [entry] = await sql<Entry[]>`
@@ -75,14 +61,13 @@ export const createEntryWithIngredient = cache(
   },
 );
 
-export const getEntryById = cache(async (entryId: number) => {
+export const getEntryById = cache(async (entryId: number, userId: number) => {
   const [entryById] = await sql<Entry[]>`
     SELECT
       *
     FROM entries
     WHERE
-      id = ${entryId}
-
+      id = ${entryId} AND user_id=${userId}
   `;
   return entryById;
 });
