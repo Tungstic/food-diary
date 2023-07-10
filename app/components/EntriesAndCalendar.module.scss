@@ -3,6 +3,10 @@
   display: flex;
   justify-content: space-between;
   margin-top: 16px;
+
+  & > div > ul > a:hover {
+    text-decoration: none;
+  }
 }
 .listOfIngredients {
   display: flex;
