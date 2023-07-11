@@ -16,7 +16,7 @@ export default function ShowEntry({ entryId }) {
     }
 
     firstRenderFetch().catch((error) => console.log(error));
-  }, []);
+  }, [entryId]);
 
   if (Object.keys(entry).length < 1) {
     return 'Loading...';
