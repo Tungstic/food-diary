@@ -19,21 +19,21 @@ export default function ShowEntry({ entryId }) {
   }, [entryId]);
 
   if (Object.keys(entry).length < 1) {
-    return 'Loading...';
+    return <div style={{ minHeight: '100vh' }}>Loading...</div>;
   }
   return (
     <div className={styles.wrapper}>
       <div>
         <div>{`Meal name: ${entry.mealName}`}</div>
 
-        <div>
+        <div className={styles.lists}>
           Ingredients:
           {entry.onlyIngredientNames.map((i) => {
             return <div key={`ingredient ${i}`}>{i}</div>;
           })}
         </div>
         {Object.keys(entry).includes('onlySymptomNames') && (
-          <div>
+          <div className={styles.lists}>
             Symptoms:
             {entry.onlySymptomNames.map((i) => {
               return <div key={`symptom ${i}`}>{i}</div>;
@@ -41,6 +41,7 @@ export default function ShowEntry({ entryId }) {
           </div>
         )}
         <div>{`Note: ${entry.note !== '' ? entry.note : '--'}`}</div>
+        <button>Edit</button>
       </div>
     </div>
   );

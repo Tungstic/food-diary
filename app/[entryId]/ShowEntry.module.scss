@@ -12,5 +12,14 @@
     background-color: rgba(82, 67, 172, 0.9);
     color: white;
     box-shadow: 8px 8px 5px #c6c6c6;
+
+    & > button {
+      align-self: flex-end;
+      min-width: 100px;
+    }
   }
+}
+.lists {
+  display: flex;
+  gap: 8px;
 }
