@@ -28,15 +28,25 @@ export default function ShowEntry({ entryId }) {
 
         <div className={styles.lists}>
           Ingredients:
-          {entry.onlyIngredientNames.map((i) => {
-            return <div key={`ingredient ${i}`}>{i}</div>;
+          {entry.onlyIngredientNames.map((item, index) => {
+            return (
+              <div key={`ingredient ${item}`}>
+                {index > 0 && '/ '}
+                {item}
+              </div>
+            );
           })}
         </div>
         {Object.keys(entry).includes('onlySymptomNames') && (
           <div className={styles.lists}>
             Symptoms:
-            {entry.onlySymptomNames.map((i) => {
-              return <div key={`symptom ${i}`}>{i}</div>;
+            {entry.onlySymptomNames.map((item, index) => {
+              return (
+                <div key={`symptom ${item}`}>
+                  {index > 0 && '/ '}
+                  {item}
+                </div>
+              );
             })}
           </div>
         )}
