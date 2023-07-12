@@ -48,7 +48,7 @@ export default function IngredientInputForm(props) {
         />
       </label>
       <button
-        style={{ padding: '0' }}
+        style={{ padding: '2px' }}
         disabled={isDisabled}
         onClick={async () => await handleSubmit()}
       >

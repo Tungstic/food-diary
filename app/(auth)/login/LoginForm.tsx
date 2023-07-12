@@ -36,24 +36,29 @@ export default function LoginForm(props: Props) {
   }
 
   return (
-    <form className={styles.card} onSubmit={(event) => event.preventDefault()}>
-      <label>
-        username:
-        <input
-          value={username}
-          onChange={(event) => setUsername(event.currentTarget.value)}
-        />
-      </label>
-      <label>
-        password:
-        <input
-          value={password}
-          type="password"
-          onChange={(event) => setPassword(event.currentTarget.value)}
-        />
-      </label>
-      <button onClick={async () => await login()}>Log in</button>
-      {error !== '' && <div>{error}</div>}
-    </form>
+    <div style={{ minHeight: '100vh' }}>
+      <form
+        className={styles.card}
+        onSubmit={(event) => event.preventDefault()}
+      >
+        <label>
+          username:
+          <input
+            value={username}
+            onChange={(event) => setUsername(event.currentTarget.value)}
+          />
+        </label>
+        <label>
+          password:
+          <input
+            value={password}
+            type="password"
+            onChange={(event) => setPassword(event.currentTarget.value)}
+          />
+        </label>
+        <button onClick={async () => await login()}>Log in</button>
+        {error !== '' && <div>{error}</div>}
+      </form>
+    </div>
   );
 }

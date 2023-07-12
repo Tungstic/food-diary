@@ -58,4 +58,13 @@ footer {
 
 button {
   padding: 8px;
+  padding-right: 16px;
+  padding-left: 16px;
+  border: none;
+}
+button:hover,
+:focus-visible {
+  background-color: #5243ac;
+
+  color: white;
 }

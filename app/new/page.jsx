@@ -23,7 +23,6 @@ export default async function NewEntryPage() {
 
   return (
     <div style={{ minHeight: '100vh' }}>
-      <div style={{ marginLeft: '16px', marginTop: '16px' }}>Welcome back!</div>
       <EntryForm symptoms={symptoms} user={user.id} ingredients={ingredients} />
     </div>
   );

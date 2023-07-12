@@ -1,10 +1,20 @@
 .card {
+  margin: auto;
+  margin-top: 48px;
+  background-color: #5243ac;
+  color: white;
+  border-radius: 2%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
-  margin: 18px;
-  padding: 32px;
   gap: 8px;
-  min-height: 100vh;
+  padding: 32px;
+  box-shadow: 8px 8px 5px #c6c6c6;
+
+  & > label > input:focus-visible {
+    background-color: white;
+    color: black;
+  }
 
   & > * {
     & > * {
@@ -13,14 +23,14 @@
   }
 
   button {
-    align-self: flex-start;
+    align-self: flex-end;
     padding: 8px 16px;
     border-radius: 5%;
     margin-top: 8px;
-    margin-left: 8px;
 
     &:hover {
-      background-color: #fef2c3;
+      background-color: #fae48b;
+      color: black;
     }
   }
 }

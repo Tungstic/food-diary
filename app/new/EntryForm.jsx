@@ -118,7 +118,7 @@ export default function EntryForm(props) {
   return (
     <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
       <label>
-        Name your meal (e.g. pizza, soup with dumplings, cevapcici)
+        Name your meal (e.g. pizza, granola, cevapcici)
         <input
           required
           className={styles.dish}

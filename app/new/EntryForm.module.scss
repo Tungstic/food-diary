@@ -1,11 +1,16 @@
 .form {
   display: flex;
-  margin: 16px;
+  margin: 48px;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
 
   .dish {
-    margin-left: 8px;
+    margin-left: 16px;
+
+    &:focus-visible {
+      background-color: white;
+      color: black;
+    }
   }
 }
 .symptomsInput {
@@ -24,6 +29,12 @@
 .note {
   margin-left: 8px;
   overflow: auto;
+  min-width: 250px;
+
+  &:focus-visible {
+    background-color: white;
+    color: black;
+  }
 }
 .noteWrapper {
   display: flex;
@@ -31,5 +42,6 @@
 
 .button {
   padding: 8px;
-  margin: 8px;
+  width: 100%;
+  border: 1px solid black;
 }

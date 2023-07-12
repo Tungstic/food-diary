@@ -31,24 +31,29 @@ export default function RegisterForm() {
   }
 
   return (
-    <form className={styles.card} onSubmit={(event) => event.preventDefault()}>
-      <label>
-        create your username
-        <input
-          value={username}
-          onChange={(event) => setUsername(event.currentTarget.value)}
-        />
-      </label>
-      <label>
-        create your password
-        <input
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.currentTarget.value)}
-        />
-      </label>
-      <button onClick={async () => await register()}>Register</button>
-      {error !== '' && <div>{error}</div>}
-    </form>
+    <div style={{ minHeight: '100vh' }}>
+      <form
+        className={styles.card}
+        onSubmit={(event) => event.preventDefault()}
+      >
+        <label>
+          create your username
+          <input
+            value={username}
+            onChange={(event) => setUsername(event.currentTarget.value)}
+          />
+        </label>
+        <label>
+          create your password
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.currentTarget.value)}
+          />
+        </label>
+        <button onClick={async () => await register()}>Register</button>
+        {error !== '' && <div>{error}</div>}
+      </form>
+    </div>
   );
 }

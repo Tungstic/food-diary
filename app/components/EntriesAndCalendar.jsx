@@ -43,7 +43,7 @@ export default function EntriesAndCalendar() {
       <div className={styles.withEntries}>
         <div>
           <div
-            style={{ margin: '16px', fontSize: '1.3rem' }}
+            style={{ marginLeft: '32px', fontSize: '1.3rem' }}
           >{`Meals you logged on ${value.toString().slice(0, 10)}`}</div>
           <ul style={{ listStyle: 'none' }}>
             {listOfEntries.map((entry) => {
