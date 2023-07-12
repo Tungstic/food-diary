@@ -25,7 +25,13 @@ export default async function HomePage() {
           </div>
           <Link href="/register">Try it</Link>
         </div>
-        <Image src="/../public/homeImage.avif" width={450} height={550} />
+        <Image
+          src="/homeImage.avif"
+          priority
+          unoptimized
+          width={450}
+          height={550}
+        />
       </div>
     );
   }
