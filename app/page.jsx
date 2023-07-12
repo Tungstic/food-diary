@@ -1,4 +1,6 @@
 import { cookies } from 'next/headers';
+import Image from 'next/image';
+import Link from 'next/link';
 import { getUserBySessionToken } from '../database/users';
 import EntriesAndCalendar from './components/EntriesAndCalendar';
 import styles from './Home.module.scss';
@@ -15,18 +17,15 @@ export default async function HomePage() {
   if (!user) {
     return (
       <div className={styles.content}>
-        <div>
+        <div className={styles.about}>
+          <h1>Digital Food Diary</h1>
           <div>
-            Digital diary helping you identify your food triggers by tracking
-            your diet and symptoms
+            Helping you identify your food triggers by tracking your diet and
+            symptoms
           </div>
-          <div>
-            <div>
-              Log every meal including ingredients and symptoms that you want to
-              track
-            </div>
-          </div>
+          <Link href="/register">Try it</Link>
         </div>
+        <Image src="/../public/homeImage.avif" width={450} height={550} />
       </div>
     );
   }
