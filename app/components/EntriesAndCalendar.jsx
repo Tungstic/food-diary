@@ -31,10 +31,12 @@ export default function EntriesAndCalendar() {
 
   if (listOfEntries.length < 1) {
     return (
-      <>
-        <div style={{ margin: '16px' }}>No meals logged</div>
+      <div className={styles.withEntries}>
+        <div style={{ margin: '16px', marginLeft: '32px', fontSize: '1.3rem' }}>
+          No meals logged
+        </div>
         <Calendar value={value} onChange={setValue} locale="en-GB" />
-      </>
+      </div>
     );
   }
 
