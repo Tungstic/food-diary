@@ -33,7 +33,7 @@ export default function EntriesAndCalendar() {
     return (
       <div className={styles.withEntries}>
         <div style={{ margin: '16px', marginLeft: '32px', fontSize: '1.3rem' }}>
-          No meals logged
+          No meals logged today
         </div>
         <Calendar value={value} onChange={setValue} locale="en-GB" />
       </div>
