@@ -55,7 +55,10 @@ export default async function RootLayout({ children }) {
         </header>
         {children}
         <footer>
-          <div>Made by NB ©2023</div>
+          <Link href="https://github.com/Tungstic" target="_blank">
+            <div>Made by NB ©2023</div>
+          </Link>
+
           <div>
             Disclaimer: this app does not provide any medical or dietary advice.
             Always consult a licensed health professional prior to modifying
