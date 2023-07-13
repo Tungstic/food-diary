@@ -27,7 +27,7 @@ export default async function RootLayout({ children }) {
             {user ? (
               <>
                 <div className="pages">
-                  <Link href="/">Home</Link>
+                  <Link href="/">nibbleNotes</Link>
                   <Link href="/new">New entry</Link>
                   <Link href="/statistics">Statistics</Link>
                   <Link href="/profile">My profile</Link>
@@ -43,7 +43,7 @@ export default async function RootLayout({ children }) {
             ) : (
               <>
                 <div className="pages">
-                  <Link href="/">Home</Link>
+                  <Link href="/">nibbleNotes</Link>
                 </div>
                 <div className="auth">
                   <Link href="/register">Register</Link>
