@@ -158,8 +158,6 @@ export async function GET(
     }
   }
 
-  console.log('todaysEntries mutated?', expandedEntryArray);
-
   return NextResponse.json({
     entries: expandedEntryArray,
   });
