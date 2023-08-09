@@ -22,14 +22,14 @@ export async function POST(
 ): Promise<NextResponse<CreateIngredientPost>> {
   const body = await request.json();
 
-  console.log('my body from api', body);
+  // log here "body" if necessary
 
   const newIngredient = await createIngredient(
     body.ingredientName,
     body.userId,
   );
 
-  console.log('my new ingredient', newIngredient);
+  // log here "newIngredient" if necessary
 
   if (!newIngredient) {
     return NextResponse.json(

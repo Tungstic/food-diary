@@ -22,11 +22,11 @@ export async function POST(
 ): Promise<NextResponse<CreateSymptomPost>> {
   const body = await request.json();
 
-  console.log('my body from api', body);
+  // log here "body" if necessary
 
   const newSymptom = await createSymptom(body.symptomName, body.userId);
 
-  console.log('my new symptom', newSymptom);
+  // log here "newSymptom" if necessary
 
   if (!newSymptom) {
     return NextResponse.json(

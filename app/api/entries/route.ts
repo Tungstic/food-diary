@@ -54,12 +54,12 @@ export async function POST(
     );
   }
 
-  console.log('my body from api', body);
+  // log here the body from api if necessary
 
   // check the values with zod (aren't allowed to be undefined or different data types)
   const newEntry = await createEntry(body.mealName, session.userId, body.note);
 
-  console.log('my new entry', newEntry);
+  // log here "newEntry" if necessary
 
   if (!newEntry) {
     return NextResponse.json(
