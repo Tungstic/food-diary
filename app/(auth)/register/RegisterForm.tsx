@@ -39,6 +39,7 @@ export default function RegisterForm() {
         <label>
           create your username
           <input
+            data-test-id="create-name"
             value={username}
             onChange={(event) => setUsername(event.currentTarget.value)}
           />
@@ -46,6 +47,7 @@ export default function RegisterForm() {
         <label>
           create your password
           <input
+            data-test-id="create-password"
             type="password"
             value={password}
             onChange={(event) => setPassword(event.currentTarget.value)}
