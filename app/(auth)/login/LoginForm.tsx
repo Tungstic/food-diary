@@ -44,6 +44,7 @@ export default function LoginForm(props: Props) {
         <label>
           username:
           <input
+            data-test-id="login-name"
             value={username}
             onChange={(event) => setUsername(event.currentTarget.value)}
           />
@@ -51,6 +52,7 @@ export default function LoginForm(props: Props) {
         <label>
           password:
           <input
+            data-test-id="login-password"
             value={password}
             type="password"
             onChange={(event) => setPassword(event.currentTarget.value)}
