@@ -6,6 +6,9 @@ test('make new entry without symptoms', async ({ page }) => {
   await page.getByTestId('enter-meal-name').click();
   await page.getByTestId('enter-meal-name').fill('hello');
   await page.getByTestId('enter-meal-name').press('Tab');
+
+  // the locator for react-select written by Playwright Codegen because of shadow DOM
+  // aware that css locator is not ideal
   await page.locator('.css-qbdosj-Input').first().click();
   await page.getByText('avocado', { exact: true }).click();
   await page.getByTestId('save-entry-button').click();
