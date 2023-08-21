@@ -121,6 +121,7 @@ export default function EntryForm(props) {
         Name your meal (e.g. pizza, granola, cevapcici)
         <input
           required
+          data-testid="enter-meal-name"
           className={styles.dish}
           onChange={(event) => setMealName(event.currentTarget.value)}
         />
@@ -129,6 +130,7 @@ export default function EntryForm(props) {
         <div>Choose ingredients that might trigger symptoms</div>
         <CreatableSelect
           required
+          data-testid="enter-ingredients"
           className={styles.select}
           isMulti
           isSearchable
@@ -139,6 +141,7 @@ export default function EntryForm(props) {
       <div className={styles.symptomsInput}>
         <div>Choose symptoms if you're experiencing any</div>
         <CreatableSelect
+          data-testid="enter-symptoms"
           className={styles.select}
           isMulti
           isSearchable
@@ -149,6 +152,7 @@ export default function EntryForm(props) {
       <div className={styles.noteWrapper}>
         <label htmlFor="note">Note</label>
         <textarea
+          data-testid="enter-note"
           className={styles.note}
           name="note"
           maxLength={150}
@@ -173,7 +177,11 @@ export default function EntryForm(props) {
       ingredientChoice.length > 0 &&
       newIngredient === '' &&
       newSymptom === '' ? (
-        <button className={styles.button} onClick={saveNewEntry}>
+        <button
+          data-testid="save-entry-button"
+          className={styles.button}
+          onClick={saveNewEntry}
+        >
           Save the entry
         </button>
       ) : (
