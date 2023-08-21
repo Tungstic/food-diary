@@ -2,6 +2,7 @@ import { devices, PlaywrightTestConfig } from '@playwright/test';
 
 // config file reference - https://playwright.dev/docs/test-configuration
 const config: PlaywrightTestConfig = {
+  globalSetup: './global-setup',
   webServer: {
     command: 'pnpm start',
     port: 3000,
@@ -18,7 +19,8 @@ const config: PlaywrightTestConfig = {
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    testIdAttribute: 'data-test-id',
+    testIdAttribute: 'data-testid',
+    storageState: './.auth/login.json',
   },
 
   projects: [
